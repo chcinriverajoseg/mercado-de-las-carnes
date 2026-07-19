@@ -78,4 +78,4 @@ export const cortes = [
   },
 ];
 
-export const WHATSAPP_NUMBER = "56944019952";
+export const WHATSAPP_NUMBER = "56900000000";
