@@ -1,13 +1,15 @@
 import Header from "./components/Header";
 import CategoryNav from "./components/CategoryNav";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import DeliveryInfo from "./components/DeliveryInfo";
 import CategorySection from "./components/CategorySection";
 import Featured from "./components/Featured";
-import About from "./components/About";
 import Location from "./components/Location";
 import Footer from "./components/Footer";
 import WhatsappFloat from "./components/WhatsappFloat";
+import CartDrawer from "./components/CartDrawer";
+import StockPanel from "./components/StockPanel";
 import { categorias } from "./data/productos";
 
 import vacunoBg from "./assets/vacuno-bg.jpg";
@@ -35,6 +37,7 @@ function App() {
       </div>
 
       <Hero />
+      <About />
       <DeliveryInfo />
 
       {categorias.map((categoria, index) => (
@@ -50,10 +53,11 @@ function App() {
       ))}
 
       <Featured />
-      <About />
       <Location />
       <Footer />
       <WhatsappFloat />
+      <CartDrawer />
+      <StockPanel />
     </>
   );
 }
