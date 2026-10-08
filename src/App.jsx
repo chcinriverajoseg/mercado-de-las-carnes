@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import WhatsappFloat from "./components/WhatsappFloat";
 import CartDrawer from "./components/CartDrawer";
 import StockPanel from "./components/StockPanel";
+import Splash from "./components/Splash";
 import { categorias } from "./data/productos";
 
 import vacunoBg from "./assets/vacuno-bg.jpg";
@@ -31,6 +32,7 @@ const imagenesPorCategoria = {
 function App() {
   return (
     <>
+      <Splash />
       <div className="sticky top-0 z-50">
         <Header />
         <CategoryNav />

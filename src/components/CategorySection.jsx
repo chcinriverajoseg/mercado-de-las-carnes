@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CategoryIcon } from "./icons";
+import Mascota from "./Mascota";
 import { useShop } from "../context/useShop";
 import { stockInfo } from "../utils/format";
 
@@ -42,6 +43,7 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
+        <Mascota side={alterna ? "left" : "right"} />
         <motion.div
           className="text-center max-w-lg mx-auto mb-12"
           initial="hidden"

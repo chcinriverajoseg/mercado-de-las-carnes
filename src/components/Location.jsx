@@ -1,3 +1,5 @@
+import Mascota from "./Mascota";
+
 export default function Location() {
   const horarios = [
     { dia: "Lunes a sábado", horas: "09:30 – 19:30" },
@@ -6,7 +8,8 @@ export default function Location() {
 
   return (
     <section id="ubicacion" className="bg-brand-panel px-6 py-24">
-      <div className="max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto">
+        <Mascota side="right" />
         <div className="text-center max-w-lg mx-auto mb-14">
           <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-3 inline-block">
             Visítanos

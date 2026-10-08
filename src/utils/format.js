@@ -1,4 +1,4 @@
-// Utilidades compartidas: formato de precios y estado de stock.
+//// Utilidades compartidas: formato de precios y estado de stock.
 
 // "$6.990" -> 6990 (formato chileno, "." como separador de miles)
 export function parsePrecio(precioStr) {

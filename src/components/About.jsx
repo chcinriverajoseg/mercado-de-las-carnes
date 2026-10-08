@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Mascota from "./Mascota";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -11,6 +12,7 @@ export default function About() {
       <div className="absolute top-1/3 -left-24 w-[320px] h-[320px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <Mascota side="right" className="lg:-top-12" />
         <motion.div
           initial="hidden"
           whileInView="show"

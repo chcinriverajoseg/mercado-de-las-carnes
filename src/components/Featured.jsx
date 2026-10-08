@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
+import Mascota from "./Mascota";
 import { WHATSAPP_NUMBER } from "../data/cortes";
 
 export default function Featured() {
   return (
-    <section className="relative px-6 pb-24 overflow-hidden">
+    <section className="relative px-6 pt-4 md:pt-40 pb-24 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
+        <Mascota side="left" top="-top-36" />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,6 +1,6 @@
 import { WHATSAPP_NUMBER } from "../data/cortes";
 import { useShop } from "../context/useShop";
-import logo from "../assets/logo-header.png";
+import logo from "../assets/logo-inicio.png";
 
 function WhatsAppIcon({ className }) {
   return (
@@ -38,13 +38,10 @@ export default function Header() {
     <header className="bg-brand-bg/95 backdrop-blur-sm border-b border-brand-line">
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3.5 gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <img src={logo} alt="Mercado de las Carnes" className="w-11 h-11 rounded-full shrink-0" />
-          <div className="flex flex-col min-w-0">
-            <span className="font-display text-lg tracking-wide leading-tight truncate">Mercado de las Carnes</span>
-            <span className="hidden sm:block text-[11px] tracking-wide text-brand-cream-dim">
-              Carnes frescas · Delivery · Concón
-            </span>
-          </div>
+          <img src={logo} alt="Mercado de las Carnes" className="h-12 w-auto shrink-0 rounded-sm" />
+          <span className="hidden md:block text-[11px] tracking-wide text-brand-cream-dim">
+            Carnes frescas · Delivery · Concón
+          </span>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
