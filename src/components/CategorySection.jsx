@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CategoryIcon } from "./icons";
 import Mascota from "./Mascota";
 import { useShop } from "../context/useShop";
+import { fotoProducto } from "../utils/fotos";
 import { stockInfo } from "../utils/format";
 
 const fadeUp = {
@@ -63,6 +64,7 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
           {productos.map((producto, i) => {
             const info = stockInfo(producto.stock);
             const agotado = producto.stock === 0;
+            const foto = fotoProducto(producto.nombre);
             return (
               <motion.div
                 key={producto.id}
@@ -79,6 +81,20 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
                     : "bg-gradient-to-b from-brand-panel to-black/40")
                 }
               >
+                {foto && (
+                  <div className="-mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-xl bg-brand-panel-2">
+                    <img
+                      src={foto}
+                      alt={producto.nombre}
+                      loading="lazy"
+                      className={
+                        "h-full w-full object-cover transition-transform duration-500 hover:scale-105 " +
+                        (agotado ? "grayscale opacity-60" : "")
+                      }
+                    />
+                  </div>
+                )}
+
                 {producto.destacado && (
                   <span className="absolute -top-2.5 right-4 bg-brand-red text-brand-cream text-[10px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-md shadow-brand-red/40">
                     Más pedido

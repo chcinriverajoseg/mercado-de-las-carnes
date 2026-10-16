@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import Mascota from "./Mascota";
 import { WHATSAPP_NUMBER } from "../data/cortes";
+import { fotoProducto } from "../utils/fotos";
 
 export default function Featured() {
+  const foto = fotoProducto("corte-de-la-semana");
   return (
     <section id="corte-semana" className="relative scroll-mt-16 px-6 pt-4 md:pt-40 pb-24 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
@@ -35,9 +37,18 @@ export default function Featured() {
             </a>
           </div>
 
-          <div className="aspect-[4/3] bg-brand-panel-2 border border-dashed border-brand-line rounded-lg flex items-center justify-center text-brand-gray text-sm text-center p-5">
-            Foto del corte de la semana<br />(reemplazar con imagen real)
-          </div>
+          {foto ? (
+            <img
+              src={foto}
+              alt="Corte de la semana"
+              loading="lazy"
+              className="aspect-[4/3] w-full rounded-lg object-cover border border-brand-line shadow-lg shadow-black/40"
+            />
+          ) : (
+            <div className="aspect-[4/3] bg-brand-panel-2 border border-dashed border-brand-line rounded-lg flex items-center justify-center text-brand-gray text-sm text-center p-5">
+              Foto del corte de la semana<br />(guardar como corte-de-la-semana.jpg)
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
