@@ -6,6 +6,8 @@ import { TOTAL_PRODUCTOS } from "../data/productos";
 
 const fotoA = fotoProducto("Asado de tira");
 const fotoB = fotoProducto("Lomo vetado");
+// Si aún no hay fotos reales de productos, se muestra solo la fachada.
+const hayFotos = Boolean(fotoA && fotoB);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -31,20 +33,27 @@ export default function About() {
             src={fachada}
             alt="Fachada del local en Avenida Concón Reñaca"
             loading="lazy"
-            className="row-span-2 h-full w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+            className={
+              "h-full w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30 " +
+              (hayFotos ? "row-span-2" : "col-span-2 aspect-[4/3]")
+            }
           />
-          <img
-            src={fotoA}
-            alt="Asado de tira"
-            loading="lazy"
-            className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
-          />
-          <img
-            src={fotoB}
-            alt="Lomo vetado"
-            loading="lazy"
-            className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
-          />
+          {hayFotos && (
+            <>
+              <img
+                src={fotoA}
+                alt="Asado de tira"
+                loading="lazy"
+                className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+              />
+              <img
+                src={fotoB}
+                alt="Lomo vetado"
+                loading="lazy"
+                className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+              />
+            </>
+          )}
         </motion.div>
 
         <motion.div
@@ -57,7 +66,7 @@ export default function About() {
           <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-2.5 inline-block">
             Nuestra historia
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl mb-5">
+          <h2 className="font-display text-3xl sm:text-4xl mb-5 lg:pr-32">
             Carnicería de barrio, con nombre propio
           </h2>
           <p className="text-brand-cream-dim mb-4">

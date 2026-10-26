@@ -36,6 +36,9 @@ sin tildes y con guiones. Se asigna sola:
 
 Formato recomendado: `.webp`, ~800 px de ancho, fondo blanco.
 
+> `src/assets/productoss/` (con doble s) guarda fotos de prueba que **no** se publican.
+> Solo se usan las de `src/assets/productos/`. Mientras un producto no tenga foto, su tarjeta muestra el ícono de la categoría.
+
 ### Stock
 
 `stock: 0` = Agotado (no se puede agregar) · `1–6` = "Últimas unidades" · más = Disponible.
