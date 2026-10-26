@@ -1,10 +1,39 @@
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useShop } from "../context/useShop";
-import { formatCLP } from "../utils/format";
+import { formatCLP, formatCantidad } from "../utils/format";
+import { NEGOCIO, FORMAS_PAGO } from "../data/negocio";
+
+const inputCls =
+  "w-full bg-brand-bg border border-brand-line focus:border-brand-red outline-none rounded-sm px-3 py-2.5 text-sm text-brand-cream placeholder:text-brand-gray";
 
 export default function CartDrawer() {
-  const { items, updateQty, removeItem, totalPrice, cartOpen, closeCart, buildWhatsAppUrl } =
-    useShop();
+  const {
+    items,
+    stepItem,
+    removeItem,
+    clearCart,
+    totalPrice,
+    hayPreciosPorConfirmar,
+    cartOpen,
+    closeCart,
+    buildWhatsAppUrl,
+    datos,
+    setDatos,
+  } = useShop();
+  const [paso, setPaso] = useState("carrito"); // "carrito" | "datos"
+
+  const set = (campo) => (e) => setDatos((d) => ({ ...d, [campo]: e.target.value }));
+
+  const bajoMinimo = datos.entrega === "despacho" && totalPrice < NEGOCIO.pedidoMinimo;
+  const faltaNombre = !datos.nombre.trim();
+  const faltaDireccion = datos.entrega === "despacho" && !datos.direccion.trim();
+  const puedeEnviar = items.length > 0 && !faltaNombre && !faltaDireccion && !bajoMinimo;
+
+  const cerrar = () => {
+    closeCart();
+    setPaso("carrito");
+  };
 
   return (
     <AnimatePresence>
@@ -15,101 +44,214 @@ export default function CartDrawer() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={closeCart}
+            onClick={cerrar}
           />
           <motion.aside
-            className="fixed top-0 right-0 h-full w-full sm:w-[380px] bg-brand-panel border-l border-brand-line z-[80] flex flex-col"
+            role="dialog"
+            aria-label="Carrito de compras"
+            className="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-panel border-l border-brand-line z-[80] flex flex-col"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.25 }}
           >
+            {/* cabecera con pasos */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-brand-line">
-              <h2 className="font-display text-lg">Tu carrito</h2>
+              <div className="flex items-center gap-2">
+                {paso === "datos" && (
+                  <button
+                    onClick={() => setPaso("carrito")}
+                    aria-label="Volver al carrito"
+                    className="text-brand-gray hover:text-brand-red text-lg leading-none pr-1"
+                  >
+                    ←
+                  </button>
+                )}
+                <h2 className="font-display text-lg">{paso === "carrito" ? "Tu carrito" : "Datos de entrega"}</h2>
+              </div>
               <button
-                onClick={closeCart}
+                onClick={cerrar}
                 aria-label="Cerrar carrito"
-                className="text-brand-gray hover:text-brand-red text-xl leading-none px-1"
+                className="text-brand-gray hover:text-brand-red text-2xl leading-none px-1"
               >
                 ×
               </button>
             </div>
 
+            <div className="flex gap-1 px-5 pt-3">
+              <span className={"h-1 flex-1 rounded-full " + "bg-brand-red"} />
+              <span className={"h-1 flex-1 rounded-full " + (paso === "datos" ? "bg-brand-red" : "bg-brand-line")} />
+            </div>
+
             <div className="flex-1 overflow-y-auto px-5 py-4">
-              {items.length === 0 ? (
-                <p className="text-brand-gray text-sm text-center mt-10">
-                  Aún no has agregado productos.
-                </p>
-              ) : (
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-start justify-between gap-3 border-b border-brand-line pb-4"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold leading-tight truncate">{item.nombre}</p>
-                        <p className="text-xs text-brand-gray mt-0.5">
-                          {formatCLP(item.precioNum)} {item.unidad}
-                        </p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            onClick={() => updateQty(item.id, item.cantidad - 1)}
-                            className="w-6 h-6 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
-                          >
-                            −
-                          </button>
-                          <span className="text-sm w-5 text-center">{item.cantidad}</span>
-                          <button
-                            onClick={() => updateQty(item.id, item.cantidad + 1)}
-                            className="w-6 h-6 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
-                          >
-                            +
+              {paso === "carrito" ? (
+                items.length === 0 ? (
+                  <p className="text-brand-gray text-sm text-center mt-10">Aún no has agregado productos.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {items.map((item) => (
+                      <div key={item.id} className="flex items-start justify-between gap-3 border-b border-brand-line pb-4">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold leading-tight">{item.nombre}</p>
+                          <p className="text-xs text-brand-gray mt-0.5">
+                            {item.precioNum ? `${formatCLP(item.precioNum)} ${item.unidad}` : "Precio a confirmar"}
+                          </p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <button
+                              onClick={() => stepItem(item.id, -1)}
+                              aria-label="Quitar"
+                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
+                            >
+                              −
+                            </button>
+                            <span className="text-sm min-w-[3.5rem] text-center font-semibold">
+                              {formatCantidad(item.cantidad, item.unidad)}
+                            </span>
+                            <button
+                              onClick={() => stepItem(item.id, 1)}
+                              aria-label="Agregar"
+                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-sm font-semibold text-brand-red">
+                            {item.precioNum ? formatCLP(item.precioNum * item.cantidad) : "—"}
+                          </p>
+                          <button onClick={() => removeItem(item.id)} className="text-xs text-brand-gray hover:text-brand-red mt-1.5">
+                            Quitar
                           </button>
                         </div>
                       </div>
-                      <div className="text-right shrink-0">
-                        <p className="text-sm font-semibold text-brand-red">
-                          {formatCLP(item.precioNum * item.cantidad)}
-                        </p>
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="text-xs text-brand-gray hover:text-brand-red mt-1.5"
+                    ))}
+                    <button onClick={clearCart} className="text-xs text-brand-gray hover:text-brand-red underline underline-offset-4">
+                      Vaciar carrito
+                    </button>
+                  </div>
+                )
+              ) : (
+                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <label className="block">
+                    <span className="block text-xs font-semibold text-brand-cream-dim mb-1.5">Tu nombre</span>
+                    <input value={datos.nombre} onChange={set("nombre")} autoComplete="name" placeholder="Ej: Carolina" className={inputCls} />
+                  </label>
+
+                  <fieldset>
+                    <legend className="block text-xs font-semibold text-brand-cream-dim mb-1.5">¿Cómo lo quieres recibir?</legend>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { v: "despacho", t: "Despacho", s: NEGOCIO.zonaDespacho },
+                        { v: "retiro", t: "Retiro en local", s: "Sin costo" },
+                      ].map((o) => (
+                        <label
+                          key={o.v}
+                          className={
+                            "cursor-pointer rounded-sm border px-3 py-2.5 transition-colors " +
+                            (datos.entrega === o.v ? "border-brand-red bg-brand-red/10" : "border-brand-line hover:border-brand-red/60")
+                          }
                         >
-                          Quitar
-                        </button>
-                      </div>
+                          <input type="radio" name="entrega" value={o.v} checked={datos.entrega === o.v} onChange={set("entrega")} className="sr-only" />
+                          <span className="block text-sm font-semibold">{o.t}</span>
+                          <span className="block text-[11px] text-brand-gray">{o.s}</span>
+                        </label>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </fieldset>
+
+                  {datos.entrega === "despacho" ? (
+                    <label className="block">
+                      <span className="block text-xs font-semibold text-brand-cream-dim mb-1.5">Dirección de despacho</span>
+                      <input
+                        value={datos.direccion}
+                        onChange={set("direccion")}
+                        autoComplete="street-address"
+                        placeholder="Calle, número, depto. y sector"
+                        className={inputCls}
+                      />
+                      <span className="block text-[11px] text-brand-gray mt-1.5">
+                        El costo del despacho depende de la zona y se confirma por WhatsApp.
+                      </span>
+                    </label>
+                  ) : (
+                    <p className="text-xs text-brand-cream-dim bg-brand-panel-2 border border-brand-line rounded-sm p-3">
+                      Retiras en {NEGOCIO.direccion}, {NEGOCIO.comuna}. Te avisamos por WhatsApp cuando esté listo.
+                    </p>
+                  )}
+
+                  <label className="block">
+                    <span className="block text-xs font-semibold text-brand-cream-dim mb-1.5">Forma de pago</span>
+                    <select value={datos.pago} onChange={set("pago")} className={inputCls}>
+                      {FORMAS_PAGO.map((f) => (
+                        <option key={f}>{f}</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block">
+                    <span className="block text-xs font-semibold text-brand-cream-dim mb-1.5">
+                      Indicaciones <span className="font-normal text-brand-gray">(opcional)</span>
+                    </span>
+                    <textarea
+                      value={datos.comentario}
+                      onChange={set("comentario")}
+                      rows={2}
+                      placeholder="Ej: churrasco cortado delgado, molida sin grasa…"
+                      className={inputCls + " resize-none"}
+                    />
+                  </label>
+                </form>
               )}
             </div>
 
+            {/* pie con total y acción */}
             <div className="px-5 py-4 border-t border-brand-line">
-              <div className="flex justify-between text-sm mb-4">
+              <div className="flex justify-between text-sm mb-1">
                 <span className="text-brand-cream-dim">Total estimado</span>
                 <span className="font-display text-brand-red text-lg">{formatCLP(totalPrice)}</span>
               </div>
-              {items.length > 0 ? (
-                <a
-                  href={buildWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener"
-                  className="block text-center bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm px-5 py-3 rounded-sm shadow-lg shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
-                >
-                  Enviar pedido por WhatsApp
-                </a>
-              ) : (
-                <button
-                  disabled
-                  className="block w-full text-center bg-brand-panel-2 text-brand-gray font-bold text-sm px-5 py-3 rounded-sm cursor-not-allowed"
-                >
-                  Enviar pedido por WhatsApp
-                </button>
-              )}
-              <p className="text-[11px] text-brand-gray mt-2 text-center">
-                Los precios son referenciales, se confirman por WhatsApp.
+              <p className="text-[11px] text-brand-gray mb-3">
+                {hayPreciosPorConfirmar ? "Hay productos con precio a confirmar. " : ""}
+                El peso final puede variar levemente al cortar; se confirma por WhatsApp.
               </p>
+
+              {paso === "carrito" ? (
+                <button
+                  onClick={() => setPaso("datos")}
+                  disabled={items.length === 0}
+                  className="block w-full text-center bg-brand-red hover:bg-red-600 disabled:bg-brand-panel-2 disabled:text-brand-gray disabled:shadow-none disabled:cursor-not-allowed text-brand-cream font-bold text-sm px-5 py-3 rounded-sm shadow-lg shadow-brand-red/30 transition-all"
+                >
+                  Continuar
+                </button>
+              ) : (
+                <>
+                  {(faltaNombre || faltaDireccion || bajoMinimo) && (
+                    <p className="text-[11px] text-amber-400 mb-2">
+                      {faltaNombre
+                        ? "Escribe tu nombre para continuar."
+                        : faltaDireccion
+                          ? "Escribe la dirección de despacho."
+                          : `El pedido mínimo para despacho es ${formatCLP(NEGOCIO.pedidoMinimo)}.`}
+                    </p>
+                  )}
+                  <a
+                    href={puedeEnviar ? buildWhatsAppUrl() : undefined}
+                    target="_blank"
+                    rel="noopener"
+                    aria-disabled={!puedeEnviar}
+                    onClick={(e) => !puedeEnviar && e.preventDefault()}
+                    className={
+                      "block text-center font-bold text-sm px-5 py-3 rounded-sm transition-all " +
+                      (puedeEnviar
+                        ? "bg-[#25D366] hover:bg-[#1ebe5a] text-black shadow-lg shadow-black/30"
+                        : "bg-brand-panel-2 text-brand-gray cursor-not-allowed")
+                    }
+                  >
+                    Enviar pedido por WhatsApp
+                  </a>
+                </>
+              )}
             </div>
           </motion.aside>
         </>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import logo from "../assets/logo-inicio.png";
+import logo from "../assets/logo-inicio.webp";
 
 // Pantalla de bienvenida con secuencia en 3 tiempos:
 //  1) el logo se revela desde el centro (círculo) con efecto de enfoque
 //  2) un destello recorre el logo, suben chispas rojas y aparece el lema
 //  3) dos cortinas se abren hacia los lados y se revela la página
-const ENTRADA_MS = 3000; // cuándo empiezan a abrirse las cortinas
-const SALIDA_MS = 1000; // cuánto tardan las cortinas en abrirse
+const ENTRADA_MS = 2400; // cuándo empiezan a abrirse las cortinas
+const SALIDA_MS = 900; // cuánto tardan las cortinas en abrirse
 
 const CHISPAS = Array.from({ length: 16 }, (_, i) => ({
   left: (i * 37 + 11) % 100,
@@ -18,9 +18,22 @@ const CHISPAS = Array.from({ length: 16 }, (_, i) => ({
 
 export default function Splash() {
   const reducir = useReducedMotion();
-  const [fase, setFase] = useState("entrada"); // entrada -> salida -> fuera
+  // Se muestra solo la primera vez por sesión: al recargar o volver no hace esperar.
+  const [fase, setFase] = useState(() => {
+    try {
+      return sessionStorage.getItem("mdc-splash") ? "fuera" : "entrada";
+    } catch {
+      return "entrada";
+    }
+  }); // entrada -> salida -> fuera
 
   useEffect(() => {
+    if (fase === "fuera") return;
+    try {
+      sessionStorage.setItem("mdc-splash", "1");
+    } catch {
+      /* sin almacenamiento: se mostrará cada vez */
+    }
     document.body.style.overflow = "hidden";
     const t1 = setTimeout(() => setFase("salida"), reducir ? 1200 : ENTRADA_MS);
     const t2 = setTimeout(
@@ -35,6 +48,7 @@ export default function Splash() {
       clearTimeout(t2);
       document.body.style.overflow = "";
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reducir]);
 
   if (fase === "fuera") return null;

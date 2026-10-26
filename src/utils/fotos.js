@@ -1,15 +1,15 @@
 // Fotos de productos: basta con guardar la imagen en src/assets/productos/
-// con el nombre del corte en minúsculas, sin tildes y con guiones.
-// Ej.: "Asado de tira" -> asado-de-tira.jpg   (también .jpeg, .png o .webp)
+// con el nombre del producto en minúsculas, sin tildes y con guiones.
+// Ej.: "Asado de tira" -> asado-de-tira.webp   (también .jpg, .jpeg o .png)
+import { normalizar } from "./format";
+
 const archivos = import.meta.glob("../assets/productos/*.{jpg,jpeg,png,webp}", {
   eager: true,
   import: "default",
 });
+
 export function slug(texto) {
-  return String(texto)
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
+  return normalizar(texto)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }

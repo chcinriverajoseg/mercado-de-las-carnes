@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mercado-de-las-carnes.vercel.app/sitemap.xml

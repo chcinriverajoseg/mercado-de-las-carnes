@@ -1,8 +1,9 @@
 // Catálogo completo de Mercado de las Carnes, organizado por categoría.
 // Precios referenciales — ajusta los valores según tu lista real.
 // "destacado: true" muestra un badge "Más pedido" en la card.
-// "stock" es de ejemplo (mock) mientras no haya un inventario real conectado —
-// ajústalo a mano o reemplázalo por datos reales cuando exista un backend.
+// "stock" es referencial: 0 = agotado, 1 a 6 = "Últimas unidades", más = disponible.
+// Ajústalo a mano o reemplázalo por datos reales cuando exista un backend.
+// Fotos: ver src/utils/fotos.js (se asignan solas por nombre de archivo).
 
 export const categorias = [
   {
@@ -132,3 +133,22 @@ export const categorias = [
     ],
   },
 ];
+
+// Producto destacado en la sección "Corte de la semana" (usa el id del catálogo).
+export const CORTE_SEMANA = {
+  id: "c10",
+  titulo: "Malaya al jugo",
+  texto:
+    "Nuestra especialidad de la semana: corte sabroso y rendidor, ideal para " +
+    "preparar al jugo o a la plancha. Cantidad limitada.",
+};
+
+export function buscarProducto(id) {
+  for (const cat of categorias) {
+    const p = cat.productos.find((x) => x.id === id);
+    if (p) return { ...p, categoriaId: cat.id, categoria: cat.nombre };
+  }
+  return null;
+}
+
+export const TOTAL_PRODUCTOS = categorias.reduce((s, c) => s + c.productos.length, 0);

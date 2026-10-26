@@ -2,16 +2,58 @@
 <html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Mercado de las Carnes: carnicería en Concón con cortes frescos todos los días. Pedidos por WhatsApp." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Mercado de las Carnes | Carnicería en Concón</title>
+    <title>Mercado de las Carnes | Carnicería en Concón con despacho</title>
+    <meta name="description" content="Carnicería de barrio en Concón: vacuno, cerdo, pollo, fiambrería, abarrotes y empanadas. Arma tu pedido online y envíalo por WhatsApp. Despacho en Concón y Reñaca." />
+    <meta name="theme-color" content="#0c0c0c" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="canonical" href="https://mercado-de-las-carnes.vercel.app/" />
+
+    <!-- Vista previa al compartir por WhatsApp / Facebook / Instagram -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="Mercado de las Carnes" />
+    <meta property="og:title" content="Mercado de las Carnes | Carnicería en Concón" />
+    <meta property="og:description" content="Cortes frescos todos los días. Arma tu pedido y envíalo por WhatsApp. Despacho en Concón y Reñaca." />
+    <meta property="og:url" content="https://mercado-de-las-carnes.vercel.app/" />
+    <meta property="og:image" content="https://mercado-de-las-carnes.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Datos estructurados para Google (ficha de negocio local) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ButcherShop",
+        "name": "Mercado de las Carnes",
+        "url": "https://mercado-de-las-carnes.vercel.app/",
+        "image": "https://mercado-de-las-carnes.vercel.app/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Avenida Concón Reñaca 355",
+          "addressLocality": "Concón",
+          "addressRegion": "Valparaíso",
+          "postalCode": "2510000",
+          "addressCountry": "CL"
+        },
+        "areaServed": ["Concón", "Reñaca"],
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:30", "closes": "19:30" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:00", "closes": "15:00" }
+        ],
+        "priceRange": "$$"
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Activa JavaScript para ver el catálogo de Mercado de las Carnes.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import mascota from "../assets/mascota.png";
+import mascota from "../assets/mascota.webp";
 
 // Mascota decorativa que flota suavemente y entra con animación al hacer scroll.
 // side: "left" | "right" (esquina superior de la sección donde se coloca).

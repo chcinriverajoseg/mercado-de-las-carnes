@@ -1,4 +1,4 @@
-import { WHATSAPP_NUMBER } from "../data/cortes";
+import { NEGOCIO, waLink } from "../data/negocio";
 
 export default function Footer() {
   return (
@@ -8,19 +8,24 @@ export default function Footer() {
           <div className="font-display text-xl">
             Mercado <span className="text-brand-red">de las carnes</span>
           </div>
-          <div className="flex gap-7 text-sm text-brand-cream-dim">
+          <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm text-brand-cream-dim">
             <a href="#vacuno" className="hover:text-brand-red">Productos</a>
             <a href="#nosotros" className="hover:text-brand-red">Nosotros</a>
             <a href="#ubicacion" className="hover:text-brand-red">Ubicación</a>
-            <a href={"https://wa.me/" + WHATSAPP_NUMBER} target="_blank" rel="noopener" className="hover:text-brand-red">
+            <a href={waLink("Hola")} target="_blank" rel="noopener" className="hover:text-brand-red">
               WhatsApp
             </a>
           </div>
         </div>
 
         <div className="flex flex-wrap justify-between gap-2 border-t border-brand-line pt-5 text-xs text-brand-gray">
-          <span>© 2026 Mercado de las Carnes. Todos los derechos reservados.</span>
-          <span>Concón, Chile</span>
+          <span>© {new Date().getFullYear()} {NEGOCIO.nombre}. Todos los derechos reservados.</span>
+          <span>
+            {NEGOCIO.direccion}, {NEGOCIO.comuna} · Sitio por{" "}
+            <a href="https://chacinpc.vercel.app" target="_blank" rel="noopener" className="hover:text-brand-red">
+              ChacinPC
+            </a>
+          </span>
         </div>
       </div>
     </footer>

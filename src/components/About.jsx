@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
 import Mascota from "./Mascota";
+import fachada from "../assets/hero-bg.webp";
+import { fotoProducto } from "../utils/fotos";
+import { TOTAL_PRODUCTOS } from "../data/productos";
+
+const fotoA = fotoProducto("Asado de tira");
+const fotoB = fotoProducto("Lomo vetado");
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -8,7 +14,7 @@ const fadeUp = {
 
 export default function About() {
   return (
-    <section id="nosotros" className="relative px-6 py-24 overflow-hidden">
+    <section id="nosotros" className="relative px-4 sm:px-6 py-24 overflow-hidden scroll-mt-32">
       <div className="absolute top-1/3 -left-24 w-[320px] h-[320px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -21,15 +27,24 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="grid grid-cols-2 gap-3.5"
         >
-          <div className="row-span-2 bg-gradient-to-b from-brand-panel to-brand-panel-2 border border-brand-line rounded-lg shadow-lg shadow-black/30 flex items-center justify-center text-brand-gray text-xs text-center p-3">
-            Foto del local<br />(fachada o mesón)
-          </div>
-          <div className="aspect-square bg-gradient-to-b from-brand-panel to-brand-panel-2 border border-brand-line rounded-lg shadow-lg shadow-black/30 flex items-center justify-center text-brand-gray text-xs text-center p-3">
-            Foto del equipo
-          </div>
-          <div className="aspect-square bg-gradient-to-b from-brand-panel to-brand-panel-2 border border-brand-line rounded-lg shadow-lg shadow-black/30 flex items-center justify-center text-brand-gray text-xs text-center p-3">
-            Foto de un corte
-          </div>
+          <img
+            src={fachada}
+            alt="Fachada del local en Avenida Concón Reñaca"
+            loading="lazy"
+            className="row-span-2 h-full w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+          />
+          <img
+            src={fotoA}
+            alt="Asado de tira"
+            loading="lazy"
+            className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+          />
+          <img
+            src={fotoB}
+            alt="Lomo vetado"
+            loading="lazy"
+            className="aspect-square w-full object-cover border border-brand-line rounded-lg shadow-lg shadow-black/30"
+          />
         </motion.div>
 
         <motion.div
@@ -55,7 +70,7 @@ export default function About() {
             para la semana.
           </p>
 
-          <div className="flex gap-9 mt-8 pt-7 border-t border-brand-line">
+          <div className="flex gap-6 sm:gap-9 mt-8 pt-7 border-t border-brand-line">
             <div>
               <strong className="font-display text-brand-red text-2xl block mb-1">100%</strong>
               <span className="text-xs text-brand-gray uppercase tracking-wide">Carne fresca</span>
@@ -65,8 +80,8 @@ export default function About() {
               <span className="text-xs text-brand-gray uppercase tracking-wide">Días atendiendo</span>
             </div>
             <div>
-              <strong className="font-display text-brand-red text-2xl block mb-1">+15</strong>
-              <span className="text-xs text-brand-gray uppercase tracking-wide">Cortes disponibles</span>
+              <strong className="font-display text-brand-red text-2xl block mb-1">+{Math.floor(TOTAL_PRODUCTOS / 10) * 10}</strong>
+              <span className="text-xs text-brand-gray uppercase tracking-wide">Productos</span>
             </div>
           </div>
         </motion.div>

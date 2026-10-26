@@ -1,6 +1,6 @@
-import { WHATSAPP_NUMBER } from "../data/cortes";
+import { waLink } from "../data/negocio";
 import { useShop } from "../context/useShop";
-import logo from "../assets/logo-inicio.png";
+import logo from "../assets/logo-inicio.webp";
 
 function WhatsAppIcon({ className }) {
   return (
@@ -36,9 +36,9 @@ export default function Header() {
 
   return (
     <header className="bg-brand-bg/95 backdrop-blur-sm border-b border-brand-line">
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3.5 gap-3">
+      <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <img src={logo} alt="Mercado de las Carnes" className="h-12 w-auto shrink-0 rounded-sm" />
+          <a href="#" aria-label="Ir al inicio"><img src={logo} alt="Mercado de las Carnes" className="h-11 sm:h-12 w-auto shrink-0 rounded-sm" /></a>
           <span className="hidden md:block text-[11px] tracking-wide text-brand-cream-dim">
             Carnes frescas · Delivery · Concón
           </span>
@@ -71,7 +71,7 @@ export default function Header() {
           </button>
 
           <a
-            href={"https://wa.me/" + WHATSAPP_NUMBER + "?text=Hola%2C%20quiero%20hacer%20un%20pedido"}
+            href={waLink()}
             target="_blank"
             rel="noopener"
             className="hidden sm:flex items-center gap-2 bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm px-5 py-2.5 rounded-sm shadow-md shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"

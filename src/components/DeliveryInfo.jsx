@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { NEGOCIO } from "../data/negocio";
+import { formatCLP } from "../utils/format";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -8,7 +10,7 @@ const fadeUp = {
 const items = [
   {
     titulo: "Zona de entrega",
-    detalle: "Concón y Reñaca",
+    detalle: NEGOCIO.zonaDespacho + " · o retiro en local",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
         <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" strokeWidth="1.6" />
@@ -30,7 +32,7 @@ const items = [
   },
   {
     titulo: "Pedido mínimo",
-    detalle: "$1.000 para delivery",
+    detalle: formatCLP(NEGOCIO.pedidoMinimo) + " para despacho",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
         <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
@@ -42,7 +44,7 @@ const items = [
 
 export default function DeliveryInfo() {
   return (
-    <section className="relative px-6 py-14 bg-brand-panel border-y border-brand-line overflow-hidden">
+    <section className="relative px-4 sm:px-6 py-14 bg-brand-panel border-y border-brand-line overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5">

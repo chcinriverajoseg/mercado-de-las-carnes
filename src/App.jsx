@@ -11,14 +11,16 @@ import WhatsappFloat from "./components/WhatsappFloat";
 import CartDrawer from "./components/CartDrawer";
 import StockPanel from "./components/StockPanel";
 import Splash from "./components/Splash";
+import SearchResults from "./components/SearchResults";
+import { useShop } from "./context/useShop";
 import { categorias } from "./data/productos";
 
-import vacunoBg from "./assets/vacuno-bg.jpg";
-import cerdoBg from "./assets/cerdo-bg.jpg";
-import polloBg from "./assets/pollo-bg.jpg";
-import fiambreriaBg from "./assets/fiambreria-bg.jpg";
-import abarroteBg from "./assets/abarrote-bg.jpg";
-import empanadasBg from "./assets/empanadas-bg.jpg";
+import vacunoBg from "./assets/vacuno-bg.webp";
+import cerdoBg from "./assets/cerdo-bg.webp";
+import polloBg from "./assets/pollo-bg.webp";
+import fiambreriaBg from "./assets/fiambreria-bg.webp";
+import abarroteBg from "./assets/abarrote-bg.webp";
+import empanadasBg from "./assets/empanadas-bg.webp";
 
 const imagenesPorCategoria = {
   vacuno: vacunoBg,
@@ -30,6 +32,9 @@ const imagenesPorCategoria = {
 };
 
 function App() {
+  const { busqueda } = useShop();
+  const buscando = busqueda.trim().length > 0;
+
   return (
     <>
       <Splash />
@@ -38,24 +43,30 @@ function App() {
         <CategoryNav />
       </div>
 
-      <Hero />
-      <About />
-      <DeliveryInfo />
+      <main>
+        <Hero />
+        <About />
+        <DeliveryInfo />
 
-      {categorias.map((categoria, index) => (
-        <CategorySection
-          key={categoria.id}
-          id={categoria.id}
-          nombre={categoria.nombre}
-          descripcion={categoria.descripcion}
-          productos={categoria.productos}
-          alterna={index % 2 === 1}
-          bgImage={imagenesPorCategoria[categoria.id]}
-        />
-      ))}
+        {buscando ? (
+          <SearchResults />
+        ) : (
+          categorias.map((categoria, index) => (
+            <CategorySection
+              key={categoria.id}
+              id={categoria.id}
+              nombre={categoria.nombre}
+              descripcion={categoria.descripcion}
+              productos={categoria.productos}
+              alterna={index % 2 === 1}
+              bgImage={imagenesPorCategoria[categoria.id]}
+            />
+          ))
+        )}
 
-      <Featured />
-      <Location />
+        <Featured />
+        <Location />
+      </main>
       <Footer />
       <WhatsappFloat />
       <CartDrawer />

@@ -1,34 +1,34 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { CategoryIcon } from "./icons";
 import Mascota from "./Mascota";
-import { useShop } from "../context/useShop";
-import { fotoProducto } from "../utils/fotos";
-import { stockInfo } from "../utils/format";
+import ProductCard from "./ProductCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
 };
 
+// Cuántos productos se muestran antes del botón "Ver todos".
+const VISIBLES = 9;
+
 export default function CategorySection({ id, nombre, descripcion, productos, alterna, bgImage }) {
-  const { addItem } = useShop();
+  const [verTodos, setVerTodos] = useState(false);
+  // Orden: "Más pedido" primero, luego disponibles, y los agotados al final.
+  const orden = (p) => (p.stock === 0 ? 2 : p.destacado ? 0 : 1);
+  const ordenados = [...productos].sort((a, b) => orden(a) - orden(b));
+  const lista = verTodos ? ordenados : ordenados.slice(0, VISIBLES);
+  const ocultos = productos.length - VISIBLES;
 
   return (
     <section
       id={id}
-      className={
-        "relative px-6 py-20 scroll-mt-32 overflow-hidden " +
-        (alterna ? "bg-brand-panel" : "")
-      }
+      className={"relative px-4 sm:px-6 py-20 scroll-mt-32 overflow-hidden " + (alterna ? "bg-brand-panel" : "")}
     >
       {/* foto de fondo opcional, por categoría */}
       {bgImage && (
         <>
-          <img
-            src={bgImage}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
-          />
+          <img src={bgImage} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div
             className={
               "absolute inset-0 bg-gradient-to-b " +
@@ -40,7 +40,6 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
         </>
       )}
 
-      {/* glow ambiental decorativo */}
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -58,88 +57,28 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
           </div>
           <h2 className="font-display text-3xl sm:text-4xl mb-3">{nombre}</h2>
           <p className="text-brand-cream-dim">{descripcion}</p>
+          <p className="text-xs text-brand-gray mt-2">{productos.length} productos</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {productos.map((producto, i) => {
-            const info = stockInfo(producto.stock);
-            const agotado = producto.stock === 0;
-            const foto = fotoProducto(producto.nombre);
-            return (
-              <motion.div
-                key={producto.id}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={fadeUp}
-                transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
-                className={
-                  "relative rounded-xl p-6 border border-brand-line shadow-lg shadow-black/30 " +
-                  "hover:border-brand-red hover:shadow-brand-red/20 hover:-translate-y-1.5 transition-all duration-300 " +
-                  (alterna
-                    ? "bg-gradient-to-b from-brand-panel-2 to-brand-panel"
-                    : "bg-gradient-to-b from-brand-panel to-black/40")
-                }
-              >
-                {foto && (
-                  <div className="-mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-xl bg-brand-panel-2">
-                    <img
-                      src={foto}
-                      alt={producto.nombre}
-                      loading="lazy"
-                      className={
-                        "h-full w-full object-cover transition-transform duration-500 hover:scale-105 " +
-                        (agotado ? "grayscale opacity-60" : "")
-                      }
-                    />
-                  </div>
-                )}
-
-                {producto.destacado && (
-                  <span className="absolute -top-2.5 right-4 bg-brand-red text-brand-cream text-[10px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-md shadow-brand-red/40">
-                    Más pedido
-                  </span>
-                )}
-
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="w-9 h-9 shrink-0 rounded-lg bg-brand-red/10 flex items-center justify-center text-brand-red">
-                    <CategoryIcon id={id} className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-semibold text-base leading-snug pt-1">{producto.nombre}</h3>
-                </div>
-
-                <p className="text-brand-gray text-sm mb-3 min-h-[38px]">{producto.desc}</p>
-
-                <span
-                  className={
-                    "inline-block text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full border mb-3 " +
-                    info.className
-                  }
-                >
-                  {info.label}
-                </span>
-
-                <div className="flex items-baseline justify-between border-t border-dashed border-brand-line pt-3 mb-4">
-                  <span className="font-display text-brand-red text-lg">{producto.precio}</span>
-                  <span className="text-xs text-brand-gray">{producto.unidad}</span>
-                </div>
-
-                <button
-                  onClick={() => addItem(producto)}
-                  disabled={agotado}
-                  className={
-                    "w-full text-xs font-bold uppercase tracking-wide px-4 py-2.5 rounded-sm transition-all " +
-                    (agotado
-                      ? "bg-brand-panel-2 text-brand-gray cursor-not-allowed"
-                      : "bg-brand-red hover:bg-red-600 text-brand-cream shadow-md shadow-brand-red/30 hover:shadow-brand-red/50")
-                  }
-                >
-                  {agotado ? "Agotado" : "Agregar al carrito"}
-                </button>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+          {lista.map((producto, i) => (
+            <ProductCard key={producto.id} producto={producto} categoriaId={id} alterna={alterna} index={i} />
+          ))}
         </div>
+
+        {ocultos > 0 && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => {
+                if (verTodos) document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                setVerTodos((v) => !v);
+              }}
+              className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red text-sm font-semibold px-8 py-3.5 rounded-sm transition"
+            >
+              {verTodos ? "Mostrar menos" : `Ver los ${productos.length} productos de ${nombre.toLowerCase()}`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
