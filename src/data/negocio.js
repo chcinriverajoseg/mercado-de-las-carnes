@@ -1,5 +1,5 @@
 // Datos del negocio en UN solo lugar. Si algo cambia (teléfono, horario,
-// dirección), se edita aquí y se actualiza en todo el sitio.
+// dirección, despacho), se edita aquí y se actualiza en todo el sitio.
 
 // Número de WhatsApp del local: formato 569XXXXXXXX (sin +, sin espacios).
 // ⚠️ IMPORTANTE: reemplazar por el número real antes de publicar.
@@ -12,12 +12,38 @@ export const NEGOCIO = {
   comuna: "Concón",
   region: "Región de Valparaíso",
   codigoPostal: "2510000",
+
+  // Despacho
   zonaDespacho: "Concón y Reñaca",
   pedidoMinimo: 1000,
+  despachoGratisDesde: 40000, // 0 = sin despacho gratis
+  despachoTodosLosDias: true,
+
+  // Horario para mostrar (texto)
   horarios: [
     { dia: "Lunes a sábado", horas: "09:30 – 19:30" },
     { dia: "Domingo", horas: "10:00 – 15:00" },
   ],
+  // Horario para calcular "Abierto ahora" (0 = domingo … 6 = sábado)
+  horarioSemana: {
+    0: ["10:00", "15:00"],
+    1: ["09:30", "19:30"],
+    2: ["09:30", "19:30"],
+    3: ["09:30", "19:30"],
+    4: ["09:30", "19:30"],
+    5: ["09:30", "19:30"],
+    6: ["09:30", "19:30"],
+  },
+
+  // Franjas para programar despacho o retiro
+  franjas: ["Mañana (10:00 – 13:00)", "Tarde (15:00 – 19:00)"],
+};
+
+// Redes y comunidad. Pega aquí los enlaces reales: lo que quede vacío no se muestra.
+export const REDES = {
+  instagram: "", // ej: "https://instagram.com/mercadodelascarnes"
+  grupoWhatsapp: "", // enlace de invitación al grupo, ej: "https://chat.whatsapp.com/XXXX"
+  googleResenas: "", // enlace a la ficha de Google (reseñas)
 };
 
 export const FORMAS_PAGO = ["Efectivo", "Transferencia", "Tarjeta (débito/crédito)"];

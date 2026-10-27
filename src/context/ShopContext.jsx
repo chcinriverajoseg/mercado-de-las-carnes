@@ -3,6 +3,7 @@ import { ShopContext } from "./shopContext.js";
 import { categorias } from "../data/productos";
 import { NEGOCIO, waLink } from "../data/negocio";
 import { parsePrecio, formatCLP, formatCantidad, esPorKilo, PASO_KILO } from "../utils/format";
+import { fechaLarga, proximosDias } from "../utils/horario";
 
 // Lectura/escritura segura en localStorage (puede fallar en modo incógnito).
 function leer(clave, porDefecto) {
@@ -27,6 +28,8 @@ const DATOS_VACIOS = {
   direccion: "",
   pago: "Efectivo",
   comentario: "",
+  fecha: "", // "AAAA-MM-DD" (vacío = lo antes posible)
+  franja: "",
 };
 
 export function ShopProvider({ children }) {
@@ -36,6 +39,7 @@ export function ShopProvider({ children }) {
   const [cartOpen, setCartOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
   const [busqueda, setBusqueda] = useState("");
+  const [ficha, setFicha] = useState(null); // producto abierto en la ficha
 
   useEffect(() => guardar("mdc-carrito", items), [items]);
   useEffect(() => guardar("mdc-datos", datos), [datos]);
@@ -86,6 +90,11 @@ export function ShopProvider({ children }) {
   const totalPrice = items.reduce((s, i) => s + i.precioNum * i.cantidad, 0);
   const hayPreciosPorConfirmar = items.some((i) => i.precioNum === 0);
 
+  // Despacho gratis: cuánto falta para llegar al monto.
+  const gratisDesde = NEGOCIO.despachoGratisDesde || 0;
+  const despachoGratis = gratisDesde > 0 && totalPrice >= gratisDesde;
+  const faltaParaGratis = gratisDesde > 0 ? Math.max(0, gratisDesde - totalPrice) : 0;
+
   const buildWhatsAppUrl = () => {
     const lineas = items.map((i) => {
       const sub = i.precioNum ? formatCLP(i.precioNum * i.cantidad) : "precio a confirmar";
@@ -96,15 +105,19 @@ export function ShopProvider({ children }) {
       datos.entrega === "retiro"
         ? `Retiro en el local (${NEGOCIO.direccion})`
         : `Despacho a: ${datos.direccion.trim() || "(dirección por confirmar)"}`;
+    const fechaOk = proximosDias(5).some((d) => d.valor === datos.fecha);
+    const cuando = fechaOk ? fechaLarga(datos.fecha) + (datos.franja ? `, ${datos.franja}` : "") : "Lo antes posible";
+    const costoDespacho = despachoGratis ? " · despacho GRATIS" : " + despacho";
 
     const partes = [
       `Hola, soy ${datos.nombre.trim() || "cliente"} y quiero hacer este pedido:`,
       "",
       ...lineas,
       "",
-      `Total estimado: ${formatCLP(totalPrice)}${datos.entrega === "despacho" ? " + despacho" : ""}`,
+      `Total estimado: ${formatCLP(totalPrice)}${datos.entrega === "despacho" ? costoDespacho : ""}`,
       "",
       `📦 ${entrega}`,
+      `🕒 ${datos.entrega === "retiro" ? "Retiro" : "Entrega"}: ${cuando}`,
       `💳 Pago: ${datos.pago}`,
     ];
     if (datos.comentario.trim()) partes.push(`📝 Nota: ${datos.comentario.trim()}`);
@@ -127,6 +140,8 @@ export function ShopProvider({ children }) {
     totalItems,
     totalPrice,
     hayPreciosPorConfirmar,
+    despachoGratis,
+    faltaParaGratis,
     buildWhatsAppUrl,
     datos,
     setDatos,
@@ -141,6 +156,10 @@ export function ShopProvider({ children }) {
     busqueda,
     setBusqueda,
     todosLosProductos,
+    ficha,
+    // Completa categoría y usos desde el catálogo, venga de donde venga el producto.
+    openFicha: (producto) => setFicha(todosLosProductos.find((p) => p.id === producto.id) || producto),
+    closeFicha: () => setFicha(null),
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

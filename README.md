@@ -19,7 +19,9 @@ npm run lint
 
 | Quiero cambiar…                         | Archivo                               |
 | --------------------------------------- | ------------------------------------- |
-| Número de WhatsApp, dirección, horarios, zona y pedido mínimo | `src/data/negocio.js` |
+| Número de WhatsApp, dirección, horarios, zona, pedido mínimo, despacho gratis, franjas de entrega | `NEGOCIO` en `src/data/negocio.js` |
+| Instagram, grupo de WhatsApp, reseñas de Google (vacío = no se muestra) | `REDES` en `src/data/negocio.js` |
+| Ofertas (`oferta: true`, `precioAntes`) y usos de cada corte | `src/data/productos.js` |
 | Productos, precios, stock, "Más pedido" | `src/data/productos.js`               |
 | Corte de la semana                      | `CORTE_SEMANA` en `src/data/productos.js` |
 | Formas de pago del checkout             | `FORMAS_PAGO` en `src/data/negocio.js` |
@@ -45,15 +47,17 @@ Formato recomendado: `.webp`, ~800 px de ancho, fondo blanco.
 
 ## Funcionalidades
 
-- Catálogo por categorías con "Ver todos", orden automático (más pedidos primero, agotados al final)
-- Buscador de productos (sin tildes, varias palabras)
-- Selector de peso ½ / 1 / 2 kg en productos por kilo; carrito en pasos de ½ kg
-- Carrito que se guarda en el navegador
-- Checkout en 2 pasos: carrito → datos (nombre, despacho/retiro, dirección, pago, indicaciones)
-- Pedido mínimo para despacho
-- Mensaje de WhatsApp con el pedido completo y formateado
-- Barra "Ver carrito" fija en celular
-- SEO local: Open Graph (vista previa al compartir), datos estructurados `ButcherShop`, sitemap
+- **Ofertas de la semana**: sección propia + etiqueta en la tarjeta. Con `precioAntes` muestra precio tachado y "Ahorras X%".
+- **Filtros por preparación** (Parrilla, Horno, Olla, Sartén) y **orden** (más pedidos, precio, A–Z) en cada categoría
+- **Ficha de producto** al tocar foto o nombre: usos, consejo de preparación, cantidad libre por ½ kg
+- **Calculadora de asado**: adultos/niños, apetito y estilo → kilos y cortes sugeridos, carbón y empanadas opcionales, "Agregar todo al carrito"
+- **Despacho gratis** sobre el monto configurado, con barra de avance en el carrito
+- **Entrega programada**: lo antes posible o día específico + franja (despacho o retiro)
+- **Barra superior** con despacho gratis y "Abierto ahora / Cerrado" en hora de Chile
+- **Preguntas frecuentes** y footer con tienda, ayuda, horario, medios de pago y redes
+- Buscador, selector ½/1/2 kg, carrito guardado, checkout en 2 pasos, mensaje de WhatsApp completo
+- Orden automático: más pedidos y ofertas primero, agotados al final
+- SEO local: Open Graph, datos estructurados `ButcherShop`, sitemap
 
 ---
 Desarrollado por [ChacinPC](https://chacinpc.vercel.app)

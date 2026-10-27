@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { CategoryIcon } from "./icons";
 import { useShop } from "../context/useShop";
 import { fotoProducto } from "../utils/fotos";
-import { stockInfo, esPorKilo, formatCantidad, formatCLP, parsePrecio } from "../utils/format";
+import { stockInfo, esPorKilo, formatCantidad, formatCLP, parsePrecio, ofertaInfo } from "../utils/format";
+import { USOS } from "../data/productos";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -14,7 +15,7 @@ const fadeUp = {
 const PESOS = [0.5, 1, 2];
 
 export default function ProductCard({ producto, categoriaId, alterna = false, index = 0 }) {
-  const { addItem } = useShop();
+  const { addItem, openFicha } = useShop();
   const porKilo = esPorKilo(producto.unidad);
   const [cantidad, setCantidad] = useState(1);
 
@@ -22,6 +23,8 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
   const agotado = producto.stock === 0;
   const foto = fotoProducto(producto.nombre);
   const precioNum = parsePrecio(producto.precio);
+  const oferta = ofertaInfo(producto);
+  const abrirFicha = () => openFicha({ ...producto, categoriaId });
 
   return (
     <motion.div
@@ -37,7 +40,12 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
       }
     >
       {foto && (
-        <div className="-mx-3 -mt-3 sm:-mx-6 sm:-mt-6 mb-3 sm:mb-4 aspect-square sm:aspect-[4/3] overflow-hidden rounded-t-xl bg-brand-panel-2">
+        <button
+          type="button"
+          onClick={abrirFicha}
+          aria-label={"Ver detalle de " + producto.nombre}
+          className="block -mx-3 -mt-3 sm:-mx-6 sm:-mt-6 mb-3 sm:mb-4 aspect-square sm:aspect-[4/3] overflow-hidden rounded-t-xl bg-brand-panel-2"
+        >
           <img
             src={foto}
             alt={producto.nombre}
@@ -47,7 +55,13 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
               (agotado ? "grayscale opacity-60" : "")
             }
           />
-        </div>
+        </button>
+      )}
+
+      {oferta.enOferta && (
+        <span className="absolute -top-2.5 left-2 sm:left-4 z-10 bg-amber-400 text-black text-[9px] sm:text-[10px] font-extrabold tracking-wide uppercase px-2.5 py-1 rounded-full shadow-md shadow-black/40">
+          {oferta.ahorroPct ? `Ahorras ${oferta.ahorroPct}%` : "Oferta"}
+        </span>
       )}
 
       {producto.destacado && (
@@ -62,10 +76,20 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
             <CategoryIcon id={categoriaId} className="w-5 h-5" />
           </div>
         )}
-        <h3 className="font-semibold text-sm sm:text-base leading-snug sm:pt-1">{producto.nombre}</h3>
+        <h3 className="font-semibold text-sm sm:text-base leading-snug sm:pt-1">
+          <button type="button" onClick={abrirFicha} className="text-left hover:text-brand-red transition-colors">
+            {producto.nombre}
+          </button>
+        </h3>
       </div>
 
       <p className="hidden sm:block text-brand-gray text-sm mb-3">{producto.desc}</p>
+
+      {producto.usos?.length > 0 && (
+        <p className="hidden sm:block text-[11px] text-brand-cream-dim mb-3">
+          Ideal para: {producto.usos.map((u) => USOS[u]).join(" · ")}
+        </p>
+      )}
 
       <span
         className={
@@ -78,7 +102,12 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
 
       <div className="mt-auto">
         <div className="flex flex-wrap items-baseline justify-between gap-x-2 border-t border-dashed border-brand-line pt-2 sm:pt-3 mb-2 sm:mb-3">
-          <span className="font-display text-brand-red text-base sm:text-lg">{producto.precio}</span>
+          <span className="flex flex-wrap items-baseline gap-x-2">
+            <span className="font-display text-brand-red text-base sm:text-lg">{producto.precio}</span>
+            {oferta.antes > 0 && (
+              <span className="text-[11px] sm:text-xs text-brand-gray line-through">{formatCLP(oferta.antes)}</span>
+            )}
+          </span>
           <span className="text-[11px] sm:text-xs text-brand-gray">{producto.unidad}</span>
         </div>
 

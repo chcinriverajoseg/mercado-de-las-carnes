@@ -20,7 +20,10 @@ const items = [
   },
   {
     titulo: "Costo del envío",
-    detalle: "Varía según distancia y zona",
+    detalle:
+      NEGOCIO.despachoGratisDesde > 0
+        ? "Gratis sobre " + formatCLP(NEGOCIO.despachoGratisDesde) + " · todos los días"
+        : "Varía según distancia y zona",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
         <rect x="3" y="9" width="12" height="8" rx="1.2" stroke="currentColor" strokeWidth="1.6" />

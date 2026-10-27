@@ -1,6 +1,10 @@
 // Catálogo completo de Mercado de las Carnes, organizado por categoría.
 // Precios referenciales — ajusta los valores según tu lista real.
 // "destacado: true" muestra un badge "Más pedido" en la card.
+// "oferta: true" lo muestra en "Ofertas de la semana". Si pones "precioAntes"
+//   (ej: "$20.998"), se ve el precio anterior tachado y el % de ahorro.
+// "usos": para qué sirve el corte → "parrilla", "horno", "olla", "sarten".
+//   Se usan para los filtros de cada categoría y la calculadora de asado.
 // "stock" es referencial: 0 = agotado, 1 a 6 = "Últimas unidades", más = disponible.
 // Ajústalo a mano o reemplázalo por datos reales cuando exista un backend.
 // Fotos: ver src/utils/fotos.js (se asignan solas por nombre de archivo).
@@ -11,49 +15,49 @@ export const categorias = [
     nombre: "Cortes de Vacuno",
     descripcion: "Los clásicos de la carnicería chilena, seleccionados a diario.",
     productos: [
-      { id: "v1", nombre: "Abastero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "v2", nombre: "Asado carnicero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "v3", nombre: "Asado de tira", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", destacado: true, stock: 10 },
-      { id: "v4", nombre: "Asiento", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10 },
-      { id: "v5", nombre: "Cazuela de vacuno", desc: "Corte fresco de vacuno.", precio: "$7.998", unidad: "/ kilo", stock: 10 },
-      { id: "v6", nombre: "Choclillo", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10 },
-      { id: "v7", nombre: "Chunchul", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10 },
-      { id: "v8", nombre: "Churrasco de vacuno", desc: "Corte fresco de vacuno.", precio: "$9.998", unidad: "/ kilo", stock: 10 },
-      { id: "v9", nombre: "Cola de vacuno / coluda", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "v10", nombre: "Entraña", desc: "Corte fresco de vacuno.", precio: "$23.998", unidad: "/ kilo", stock: 10 },
-      { id: "v11", nombre: "Entrecot", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "v12", nombre: "Filete", desc: "Corte fresco de vacuno.", precio: "$23.998", unidad: "/ kilo", stock: 10 },
-      { id: "v13", nombre: "Filete medallón", desc: "Corte fresco de vacuno.", precio: "$17.998", unidad: "/ kilo", stock: 10 },
-      { id: "v14", nombre: "Filete porcionado", desc: "Corte fresco de vacuno.", precio: "$16.998", unidad: "/ kilo", stock: 10 },
-      { id: "v15", nombre: "Flat iron", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10 },
-      { id: "v16", nombre: "Grasa de vacuno", desc: "Corte fresco de vacuno.", precio: "$1.200", unidad: "/ kilo", stock: 10 },
-      { id: "v17", nombre: "Guata callo", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10 },
-      { id: "v18", nombre: "Hamburguesa 100 g", desc: "Corte fresco de vacuno.", precio: "$1.998", unidad: "/ unidad", stock: 10 },
-      { id: "v19", nombre: "Hamburguesa 150 g", desc: "Corte fresco de vacuno.", precio: "$1.498", unidad: "/ unidad", stock: 10 },
-      { id: "v20", nombre: "Hamburguesa 200 g", desc: "Corte fresco de vacuno.", precio: "$1.998", unidad: "/ unidad", stock: 10 },
-      { id: "v21", nombre: "Hígado", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10 },
-      { id: "v22", nombre: "Huachalomo", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10 },
-      { id: "v23", nombre: "Hueso carnudo", desc: "Corte fresco de vacuno.", precio: "$5.598", unidad: "/ kilo", stock: 10 },
-      { id: "v24", nombre: "Lengua", desc: "Corte fresco de vacuno.", precio: "$9.998", unidad: "/ kilo", stock: 10 },
-      { id: "v25", nombre: "Lomo liso", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10 },
-      { id: "v26", nombre: "Lomo vetado", desc: "Corte fresco de vacuno.", precio: "$18.998", unidad: "/ kilo", stock: 10 },
-      { id: "v27", nombre: "Molida corriente", desc: "Corte fresco de vacuno.", precio: "$7.998", unidad: "/ kilo", stock: 10 },
-      { id: "v28", nombre: "Molida especial", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10 },
-      { id: "v29", nombre: "Molleja", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10 },
-      { id: "v30", nombre: "Osobuco", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10 },
-      { id: "v31", nombre: "Palanca", desc: "Corte fresco de vacuno.", precio: "$12.998", unidad: "/ kilo", stock: 10 },
-      { id: "v32", nombre: "Patas de vacuno", desc: "Corte fresco de vacuno.", precio: "$6.498", unidad: "/ kilo", stock: 10 },
-      { id: "v33", nombre: "Plateada", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10 },
-      { id: "v34", nombre: "Pollo barriga", desc: "Corte fresco de vacuno.", precio: "$19.998", unidad: "/ kilo", stock: 10 },
-      { id: "v35", nombre: "Pollo ganso", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10 },
-      { id: "v36", nombre: "Posta negra", desc: "Corte fresco de vacuno.", precio: "$13.998", unidad: "/ kilo", stock: 10 },
-      { id: "v37", nombre: "Punta ganso", desc: "Corte fresco de vacuno.", precio: "$21.998", unidad: "/ kilo", stock: 10 },
-      { id: "v38", nombre: "Punta picana", desc: "Corte fresco de vacuno.", precio: "$13.998", unidad: "/ kilo", stock: 10 },
-      { id: "v39", nombre: "Sobrecostilla", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10 },
-      { id: "v40", nombre: "Tapabarriga", desc: "Corte fresco de vacuno.", precio: "$17.998", unidad: "/ kilo", stock: 10 },
-      { id: "v41", nombre: "Tapapecho", desc: "Corte fresco de vacuno.", precio: "$10.998", unidad: "/ kilo", stock: 10 },
-      { id: "v42", nombre: "Tomahawk", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "v43", nombre: "Caja de churrasco de vacuno", desc: "Caja de 5 kg, ideal para congelar.", precio: "$44.998", unidad: "/ caja 5 kg", stock: 10 },
+      { id: "v1", nombre: "Abastero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["olla", "horno"] },
+      { id: "v2", nombre: "Asado carnicero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["olla", "horno"] },
+      { id: "v3", nombre: "Asado de tira", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", destacado: true, stock: 10, usos: ["parrilla", "horno"] },
+      { id: "v4", nombre: "Asiento", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno"] },
+      { id: "v5", nombre: "Cazuela de vacuno", desc: "Corte fresco de vacuno.", precio: "$7.998", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v6", nombre: "Choclillo", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10, usos: ["horno", "olla"] },
+      { id: "v7", nombre: "Chunchul", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "v8", nombre: "Churrasco de vacuno", desc: "Corte fresco de vacuno.", precio: "$9.998", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
+      { id: "v9", nombre: "Cola de vacuno / coluda", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["olla"] },
+      { id: "v10", nombre: "Entraña", desc: "Corte fresco de vacuno.", precio: "$23.998", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "v11", nombre: "Entrecot", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["parrilla", "sarten"] },
+      { id: "v12", nombre: "Filete", desc: "Corte fresco de vacuno.", precio: "$23.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "parrilla", "horno"] },
+      { id: "v13", nombre: "Filete medallón", desc: "Corte fresco de vacuno.", precio: "$17.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "parrilla"] },
+      { id: "v14", nombre: "Filete porcionado", desc: "Corte fresco de vacuno.", precio: "$16.998", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
+      { id: "v15", nombre: "Flat iron", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "sarten"], oferta: true, precioAntes: "" },
+      { id: "v16", nombre: "Grasa de vacuno", desc: "Corte fresco de vacuno.", precio: "$1.200", unidad: "/ kilo", stock: 10  },
+      { id: "v17", nombre: "Guata callo", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v18", nombre: "Hamburguesa 100 g", desc: "Corte fresco de vacuno.", precio: "$1.998", unidad: "/ unidad", stock: 10, usos: ["parrilla", "sarten"] },
+      { id: "v19", nombre: "Hamburguesa 150 g", desc: "Corte fresco de vacuno.", precio: "$1.498", unidad: "/ unidad", stock: 10, usos: ["parrilla", "sarten"] },
+      { id: "v20", nombre: "Hamburguesa 200 g", desc: "Corte fresco de vacuno.", precio: "$1.998", unidad: "/ unidad", stock: 10, usos: ["parrilla", "sarten"] },
+      { id: "v21", nombre: "Hígado", desc: "Corte fresco de vacuno.", precio: "$5.998", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
+      { id: "v22", nombre: "Huachalomo", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["olla", "parrilla"] },
+      { id: "v23", nombre: "Hueso carnudo", desc: "Corte fresco de vacuno.", precio: "$5.598", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v24", nombre: "Lengua", desc: "Corte fresco de vacuno.", precio: "$9.998", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v25", nombre: "Lomo liso", desc: "Corte fresco de vacuno.", precio: "$15.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "sarten"], oferta: true, precioAntes: "" },
+      { id: "v26", nombre: "Lomo vetado", desc: "Corte fresco de vacuno.", precio: "$18.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "sarten"], oferta: true, precioAntes: "" },
+      { id: "v27", nombre: "Molida corriente", desc: "Corte fresco de vacuno.", precio: "$7.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "olla"] },
+      { id: "v28", nombre: "Molida especial", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "olla"] },
+      { id: "v29", nombre: "Molleja", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "v30", nombre: "Osobuco", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v31", nombre: "Palanca", desc: "Corte fresco de vacuno.", precio: "$12.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "sarten"] },
+      { id: "v32", nombre: "Patas de vacuno", desc: "Corte fresco de vacuno.", precio: "$6.498", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "v33", nombre: "Plateada", desc: "Corte fresco de vacuno.", precio: "$11.998", unidad: "/ kilo", stock: 10, usos: ["olla", "horno"] },
+      { id: "v34", nombre: "Pollo barriga", desc: "Corte fresco de vacuno.", precio: "$19.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
+      { id: "v35", nombre: "Pollo ganso", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["horno", "olla"] },
+      { id: "v36", nombre: "Posta negra", desc: "Corte fresco de vacuno.", precio: "$13.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno"] },
+      { id: "v37", nombre: "Punta ganso", desc: "Corte fresco de vacuno.", precio: "$21.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
+      { id: "v38", nombre: "Punta picana", desc: "Corte fresco de vacuno.", precio: "$13.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
+      { id: "v39", nombre: "Sobrecostilla", desc: "Corte fresco de vacuno.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["parrilla", "olla"] },
+      { id: "v40", nombre: "Tapabarriga", desc: "Corte fresco de vacuno.", precio: "$17.998", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "v41", nombre: "Tapapecho", desc: "Corte fresco de vacuno.", precio: "$10.998", unidad: "/ kilo", stock: 10, usos: ["olla", "horno"] },
+      { id: "v42", nombre: "Tomahawk", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["parrilla"] },
+      { id: "v43", nombre: "Caja de churrasco de vacuno", desc: "Caja de 5 kg, ideal para congelar.", precio: "$44.998", unidad: "/ caja 5 kg", stock: 10, usos: ["sarten"] },
     ],
   },
   {
@@ -61,23 +65,23 @@ export const categorias = [
     nombre: "Cerdo",
     descripcion: "Cortes frescos de cerdo, listos para hornear, freír o a la parrilla.",
     productos: [
-      { id: "c1", nombre: "Arrollado huaso", desc: "Corte fresco de cerdo.", precio: "$11.998", unidad: "/ kilo", stock: 10 },
-      { id: "c2", nombre: "Chicharrón", desc: "Corte fresco de cerdo.", precio: "$9.998", unidad: "/ kilo", stock: 10 },
-      { id: "c3", nombre: "Chuleta de centro", desc: "Corte fresco de cerdo.", precio: "$5.298", unidad: "/ kilo", stock: 10 },
-      { id: "c4", nombre: "Chuleta parrillera", desc: "Corte fresco de cerdo.", precio: "$5.298", unidad: "/ kilo", stock: 10 },
-      { id: "c5", nombre: "Costillar", desc: "Corte fresco de cerdo.", precio: "$7.498", unidad: "/ kilo", destacado: true, stock: 10 },
-      { id: "c6", nombre: "Costillas baby ribs", desc: "Corte fresco de cerdo.", precio: "$6.498", unidad: "/ kilo", stock: 10 },
-      { id: "c7", nombre: "Grasa de cerdo", desc: "Corte fresco de cerdo.", precio: "$3.598", unidad: "/ kilo", stock: 10 },
-      { id: "c8", nombre: "Longaniza", desc: "Corte fresco de cerdo.", precio: "$7.998", unidad: "/ kilo", stock: 10 },
-      { id: "c9", nombre: "Lomo centro", desc: "Corte fresco de cerdo.", precio: "$6.998", unidad: "/ kilo", stock: 10 },
-      { id: "c10", nombre: "Malaya", desc: "Corte fresco de cerdo.", precio: "$9.998", unidad: "/ kilo", stock: 10 },
-      { id: "c11", nombre: "Patita de cerdo", desc: "Corte fresco de cerdo.", precio: "$3.798", unidad: "/ kilo", stock: 10 },
-      { id: "c12", nombre: "Pernil", desc: "Corte fresco de cerdo.", precio: "$3.798", unidad: "/ kilo", stock: 10 },
-      { id: "c13", nombre: "Pernil cocido", desc: "Corte fresco de cerdo.", precio: "$8.998", unidad: "/ kilo", stock: 10 },
-      { id: "c14", nombre: "Prieta", desc: "Corte fresco de cerdo.", precio: "$7.498", unidad: "/ kilo", stock: 10 },
-      { id: "c15", nombre: "Pulpa", desc: "Corte fresco de cerdo.", precio: "$5.998", unidad: "/ kilo", stock: 10 },
-      { id: "c16", nombre: "Queso cabeza", desc: "Corte fresco de cerdo.", precio: "$7.998", unidad: "/ kilo", stock: 10 },
-      { id: "c17", nombre: "Tocino ahumado", desc: "Corte fresco de cerdo.", precio: "$13.498", unidad: "/ kilo", stock: 10 },
+      { id: "c1", nombre: "Arrollado huaso", desc: "Corte fresco de cerdo.", precio: "$11.998", unidad: "/ kilo", stock: 10  },
+      { id: "c2", nombre: "Chicharrón", desc: "Corte fresco de cerdo.", precio: "$9.998", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
+      { id: "c3", nombre: "Chuleta de centro", desc: "Corte fresco de cerdo.", precio: "$5.298", unidad: "/ kilo", stock: 10, usos: ["sarten", "parrilla"] },
+      { id: "c4", nombre: "Chuleta parrillera", desc: "Corte fresco de cerdo.", precio: "$5.298", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "c5", nombre: "Costillar", desc: "Corte fresco de cerdo.", precio: "$7.498", unidad: "/ kilo", destacado: true, stock: 10, usos: ["parrilla", "horno"] },
+      { id: "c6", nombre: "Costillas baby ribs", desc: "Corte fresco de cerdo.", precio: "$6.498", unidad: "/ kilo", stock: 10, usos: ["horno", "parrilla"] },
+      { id: "c7", nombre: "Grasa de cerdo", desc: "Corte fresco de cerdo.", precio: "$3.598", unidad: "/ kilo", stock: 10  },
+      { id: "c8", nombre: "Longaniza", desc: "Corte fresco de cerdo.", precio: "$7.998", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "c9", nombre: "Lomo centro", desc: "Corte fresco de cerdo.", precio: "$6.998", unidad: "/ kilo", stock: 10, usos: ["horno", "sarten"] },
+      { id: "c10", nombre: "Malaya", desc: "Corte fresco de cerdo.", precio: "$9.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
+      { id: "c11", nombre: "Patita de cerdo", desc: "Corte fresco de cerdo.", precio: "$3.798", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "c12", nombre: "Pernil", desc: "Corte fresco de cerdo.", precio: "$3.798", unidad: "/ kilo", stock: 10, usos: ["horno", "olla"] },
+      { id: "c13", nombre: "Pernil cocido", desc: "Corte fresco de cerdo.", precio: "$8.998", unidad: "/ kilo", stock: 10  },
+      { id: "c14", nombre: "Prieta", desc: "Corte fresco de cerdo.", precio: "$7.498", unidad: "/ kilo", stock: 10, usos: ["parrilla"] },
+      { id: "c15", nombre: "Pulpa", desc: "Corte fresco de cerdo.", precio: "$5.998", unidad: "/ kilo", stock: 10, usos: ["horno", "sarten"] },
+      { id: "c16", nombre: "Queso cabeza", desc: "Corte fresco de cerdo.", precio: "$7.998", unidad: "/ kilo", stock: 10  },
+      { id: "c17", nombre: "Tocino ahumado", desc: "Corte fresco de cerdo.", precio: "$13.498", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
     ],
   },
   {
@@ -85,15 +89,15 @@ export const categorias = [
     nombre: "Pollo",
     descripcion: "Pollo fresco del día, sin congelar.",
     productos: [
-      { id: "p1", nombre: "Panita", desc: "Pollo fresco.", precio: "$2.298", unidad: "/ kilo", stock: 10 },
-      { id: "p2", nombre: "Patita de pollo", desc: "Pollo fresco.", precio: "$1.698", unidad: "/ kilo", stock: 10 },
-      { id: "p3", nombre: "Pechuga deshuesada", desc: "Pollo fresco.", precio: "$5.498", unidad: "/ kilo", destacado: true, stock: 10 },
-      { id: "p4", nombre: "Pechuga deshuesada (oferta +10 kg)", desc: "Precio especial al comprar 10 kg o más.", precio: "$4.798", unidad: "/ kilo", stock: 10 },
-      { id: "p5", nombre: "Pechuga entera", desc: "Pollo fresco.", precio: "$4.998", unidad: "/ kilo", stock: 10 },
-      { id: "p6", nombre: "Pollo entero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0 },
-      { id: "p7", nombre: "Trutro alas", desc: "Pollo fresco.", precio: "$4.480", unidad: "/ kilo", stock: 10 },
-      { id: "p8", nombre: "Trutro cuarto", desc: "Pollo fresco.", precio: "$2.998", unidad: "/ kilo", stock: 10 },
-      { id: "p9", nombre: "Trutro entero", desc: "Pollo fresco.", precio: "$2.898", unidad: "/ kilo", stock: 10 },
+      { id: "p1", nombre: "Panita", desc: "Pollo fresco.", precio: "$2.298", unidad: "/ kilo", stock: 10, usos: ["sarten"] },
+      { id: "p2", nombre: "Patita de pollo", desc: "Pollo fresco.", precio: "$1.698", unidad: "/ kilo", stock: 10, usos: ["olla"] },
+      { id: "p3", nombre: "Pechuga deshuesada", desc: "Pollo fresco.", precio: "$5.498", unidad: "/ kilo", destacado: true, stock: 10, usos: ["sarten", "horno", "parrilla"] },
+      { id: "p4", nombre: "Pechuga deshuesada (oferta +10 kg)", desc: "Precio especial al comprar 10 kg o más.", precio: "$4.798", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno", "parrilla"] },
+      { id: "p5", nombre: "Pechuga entera", desc: "Pollo fresco.", precio: "$4.998", unidad: "/ kilo", stock: 10, usos: ["horno", "sarten"] },
+      { id: "p6", nombre: "Pollo entero", desc: "Sin stock por ahora.", precio: "Consultar", unidad: "/ kilo", stock: 0, usos: ["horno"] },
+      { id: "p7", nombre: "Trutro alas", desc: "Pollo fresco.", precio: "$4.480", unidad: "/ kilo", stock: 10, usos: ["horno", "parrilla"] },
+      { id: "p8", nombre: "Trutro cuarto", desc: "Pollo fresco.", precio: "$2.998", unidad: "/ kilo", stock: 10, usos: ["horno", "parrilla", "olla"] },
+      { id: "p9", nombre: "Trutro entero", desc: "Pollo fresco.", precio: "$2.898", unidad: "/ kilo", stock: 10, usos: ["horno", "parrilla", "olla"] },
     ],
   },
   {
@@ -101,12 +105,12 @@ export const categorias = [
     nombre: "Fiambrería",
     descripcion: "Cecinas y quesos seleccionados para el día a día.",
     productos: [
-      { id: "f1", nombre: "Jamón de pierna", desc: "Corte fino, para sándwiches y picoteo.", precio: "$7.990", unidad: "/ kilo", stock: 12 },
-      { id: "f2", nombre: "Jamón serrano", desc: "Curado, sabor intenso.", precio: "$14.990", unidad: "/ kilo", destacado: true, stock: 5 },
-      { id: "f3", nombre: "Mortadela", desc: "Clásica, ideal para el colegio o el trabajo.", precio: "$4.490", unidad: "/ kilo", stock: 20 },
-      { id: "f4", nombre: "Salame", desc: "Curado, perfecto para tablas.", precio: "$8.990", unidad: "/ kilo", stock: 9 },
-      { id: "f5", nombre: "Queso mantecoso", desc: "Suave y cremoso.", precio: "$7.490", unidad: "/ kilo", stock: 0 },
-      { id: "f6", nombre: "Vienesas", desc: "Para el completo de siempre.", precio: "$3.990", unidad: "/ paquete", stock: 40 },
+      { id: "f1", nombre: "Jamón de pierna", desc: "Corte fino, para sándwiches y picoteo.", precio: "$7.990", unidad: "/ kilo", stock: 12  },
+      { id: "f2", nombre: "Jamón serrano", desc: "Curado, sabor intenso.", precio: "$14.990", unidad: "/ kilo", destacado: true, stock: 5  },
+      { id: "f3", nombre: "Mortadela", desc: "Clásica, ideal para el colegio o el trabajo.", precio: "$4.490", unidad: "/ kilo", stock: 20  },
+      { id: "f4", nombre: "Salame", desc: "Curado, perfecto para tablas.", precio: "$8.990", unidad: "/ kilo", stock: 9  },
+      { id: "f5", nombre: "Queso mantecoso", desc: "Suave y cremoso.", precio: "$7.490", unidad: "/ kilo", stock: 0  },
+      { id: "f6", nombre: "Vienesas", desc: "Para el completo de siempre.", precio: "$3.990", unidad: "/ paquete", stock: 40  },
     ],
   },
   {
@@ -114,11 +118,11 @@ export const categorias = [
     nombre: "Abarrotes",
     descripcion: "Lo básico para completar tu compra, sin salir del barrio.",
     productos: [
-      { id: "a1", nombre: "Arroz grado 1", desc: "Bolsa de 1 kilo.", precio: "$1.290", unidad: "/ unidad", stock: 50 },
-      { id: "a2", nombre: "Aceite vegetal", desc: "Botella de 1 litro.", precio: "$2.990", unidad: "/ unidad", stock: 33 },
-      { id: "a3", nombre: "Carbón para asado", desc: "Bolsa de 4 kilos.", precio: "$4.990", unidad: "/ bolsa", destacado: true, stock: 27 },
-      { id: "a4", nombre: "Condimentos para carne", desc: "Sazonador especial parrillero.", precio: "$1.990", unidad: "/ unidad", stock: 45 },
-      { id: "a5", nombre: "Bebida gaseosa 1.5L", desc: "Varios sabores disponibles.", precio: "$1.790", unidad: "/ unidad", stock: 60 },
+      { id: "a1", nombre: "Arroz grado 1", desc: "Bolsa de 1 kilo.", precio: "$1.290", unidad: "/ unidad", stock: 50  },
+      { id: "a2", nombre: "Aceite vegetal", desc: "Botella de 1 litro.", precio: "$2.990", unidad: "/ unidad", stock: 33  },
+      { id: "a3", nombre: "Carbón para asado", desc: "Bolsa de 4 kilos.", precio: "$4.990", unidad: "/ bolsa", destacado: true, stock: 27  },
+      { id: "a4", nombre: "Condimentos para carne", desc: "Sazonador especial parrillero.", precio: "$1.990", unidad: "/ unidad", stock: 45  },
+      { id: "a5", nombre: "Bebida gaseosa 1.5L", desc: "Varios sabores disponibles.", precio: "$1.790", unidad: "/ unidad", stock: 60  },
     ],
   },
   {
@@ -126,10 +130,10 @@ export const categorias = [
     nombre: "Empanadas",
     descripcion: "Hechas en el local, para llevar o encargar por docena.",
     productos: [
-      { id: "e1", nombre: "Empanada de pino", desc: "La clásica chilena.", precio: "$1.590", unidad: "/ unidad", destacado: true, stock: 24 },
-      { id: "e2", nombre: "Empanada de queso", desc: "Frita o al horno.", precio: "$1.390", unidad: "/ unidad", stock: 18 },
-      { id: "e3", nombre: "Empanada camarón queso", desc: "Nuestra especialidad.", precio: "$2.490", unidad: "/ unidad", stock: 2 },
-      { id: "e4", nombre: "Empanada napolitana", desc: "Jamón, queso y tomate.", precio: "$1.890", unidad: "/ unidad", stock: 16 },
+      { id: "e1", nombre: "Empanada de pino", desc: "La clásica chilena.", precio: "$1.590", unidad: "/ unidad", destacado: true, stock: 24  },
+      { id: "e2", nombre: "Empanada de queso", desc: "Frita o al horno.", precio: "$1.390", unidad: "/ unidad", stock: 18  },
+      { id: "e3", nombre: "Empanada camarón queso", desc: "Nuestra especialidad.", precio: "$2.490", unidad: "/ unidad", stock: 2  },
+      { id: "e4", nombre: "Empanada napolitana", desc: "Jamón, queso y tomate.", precio: "$1.890", unidad: "/ unidad", stock: 16  },
     ],
   },
 ];
@@ -152,3 +156,27 @@ export function buscarProducto(id) {
 }
 
 export const TOTAL_PRODUCTOS = categorias.reduce((s, c) => s + c.productos.length, 0);
+
+export const OFERTAS = categorias.flatMap((cat) =>
+  cat.productos.filter((p) => p.oferta).map((p) => ({ ...p, categoriaId: cat.id, categoria: cat.nombre }))
+);
+
+// Nombres e íconos de los usos de cocina.
+export const USOS = {
+  parrilla: "Parrilla",
+  horno: "Horno",
+  olla: "Olla",
+  sarten: "Sartén",
+};
+
+// Consejos generales por tipo de preparación (se muestran en la ficha del producto).
+export const CONSEJOS = {
+  parrilla:
+    "Sácalo del refri 20–30 minutos antes, sala justo al poner a la parrilla y deja reposar 5 minutos antes de cortar.",
+  horno:
+    "Sella por fuera en sartén bien caliente y termina en horno precalentado; cocción lenta para cortes con más fibra.",
+  olla:
+    "Ideal para cocción larga a fuego bajo: cazuelas, guisos y al jugo. Mientras más lento, más blando queda.",
+  sarten:
+    "Sartén muy caliente y poco aceite. Cocina pocas piezas a la vez para que se doren en vez de hervirse.",
+};

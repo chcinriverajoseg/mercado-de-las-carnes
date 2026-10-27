@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useShop } from "../context/useShop";
 import { formatCLP, formatCantidad } from "../utils/format";
 import { NEGOCIO, FORMAS_PAGO } from "../data/negocio";
+import { proximosDias } from "../utils/horario";
 
 const inputCls =
   "w-full bg-brand-bg border border-brand-line focus:border-brand-red outline-none rounded-sm px-3 py-2.5 text-sm text-brand-cream placeholder:text-brand-gray";
@@ -20,10 +21,17 @@ export default function CartDrawer() {
     buildWhatsAppUrl,
     datos,
     setDatos,
+    despachoGratis,
+    faltaParaGratis,
   } = useShop();
   const [paso, setPaso] = useState("carrito"); // "carrito" | "datos"
 
   const set = (campo) => (e) => setDatos((d) => ({ ...d, [campo]: e.target.value }));
+  const dias = proximosDias(5);
+  // Si la fecha guardada ya pasó, vuelve a "lo antes posible".
+  const fechaValida = dias.some((d) => d.valor === datos.fecha) ? datos.fecha : "";
+  const gratisDesde = NEGOCIO.despachoGratisDesde;
+  const avance = gratisDesde ? Math.min(100, (totalPrice / gratisDesde) * 100) : 0;
 
   const bajoMinimo = datos.entrega === "despacho" && totalPrice < NEGOCIO.pedidoMinimo;
   const faltaNombre = !datos.nombre.trim();
@@ -160,6 +168,38 @@ export default function CartDrawer() {
                     </div>
                   </fieldset>
 
+                  <fieldset>
+                    <legend className="block text-xs font-semibold text-brand-cream-dim mb-1.5">
+                      ¿Cuándo? {NEGOCIO.despachoTodosLosDias && <span className="font-normal text-brand-gray">· despachamos todos los días</span>}
+                    </legend>
+                    <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                      {[{ valor: "", etiqueta: "Lo antes posible" }, ...dias].map((d) => (
+                        <button
+                          key={d.valor || "asap"}
+                          type="button"
+                          onClick={() => setDatos((x) => ({ ...x, fecha: d.valor, franja: d.valor ? x.franja : "" }))}
+                          aria-pressed={fechaValida === d.valor}
+                          className={
+                            "shrink-0 text-xs font-semibold px-3 py-2 rounded-sm border transition-colors " +
+                            (fechaValida === d.valor
+                              ? "border-brand-red bg-brand-red/10 text-brand-cream"
+                              : "border-brand-line text-brand-cream-dim hover:border-brand-red/60")
+                          }
+                        >
+                          {d.etiqueta}
+                        </button>
+                      ))}
+                    </div>
+                    {fechaValida && (
+                      <select value={datos.franja} onChange={set("franja")} aria-label="Horario" className={inputCls + " mt-2"}>
+                        <option value="">Cualquier horario</option>
+                        {NEGOCIO.franjas.map((f) => (
+                          <option key={f}>{f}</option>
+                        ))}
+                      </select>
+                    )}
+                  </fieldset>
+
                   {datos.entrega === "despacho" ? (
                     <label className="block">
                       <span className="block text-xs font-semibold text-brand-cream-dim mb-1.5">Dirección de despacho</span>
@@ -171,7 +211,9 @@ export default function CartDrawer() {
                         className={inputCls}
                       />
                       <span className="block text-[11px] text-brand-gray mt-1.5">
-                        El costo del despacho depende de la zona y se confirma por WhatsApp.
+                        {despachoGratis
+                          ? "Tu pedido tiene despacho gratis."
+                          : "El costo del despacho depende de la zona y se confirma por WhatsApp."}
                       </span>
                     </label>
                   ) : (
@@ -207,6 +249,25 @@ export default function CartDrawer() {
 
             {/* pie con total y acción */}
             <div className="px-5 py-4 border-t border-brand-line">
+              {gratisDesde > 0 && items.length > 0 && (
+                <div className="mb-3.5">
+                  <p className="text-xs mb-1.5">
+                    {despachoGratis ? (
+                      <span className="text-emerald-400 font-semibold">¡Tienes despacho gratis!</span>
+                    ) : (
+                      <span className="text-brand-cream-dim">
+                        Te faltan <strong className="text-brand-cream">{formatCLP(faltaParaGratis)}</strong> para despacho gratis
+                      </span>
+                    )}
+                  </p>
+                  <div className="h-1.5 rounded-full bg-brand-line overflow-hidden">
+                    <div
+                      className={"h-full rounded-full transition-all duration-500 " + (despachoGratis ? "bg-emerald-400" : "bg-brand-red")}
+                      style={{ width: avance + "%" }}
+                    />
+                  </div>
+                </div>
+              )}
               <div className="flex justify-between text-sm mb-1">
                 <span className="text-brand-cream-dim">Total estimado</span>
                 <span className="font-display text-brand-red text-lg">{formatCLP(totalPrice)}</span>

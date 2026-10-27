@@ -1,4 +1,4 @@
-import { categorias } from "../data/productos";
+import { categorias, OFERTAS } from "../data/productos";
 import { useShop } from "../context/useShop";
 
 const estiloBase =
@@ -52,6 +52,16 @@ export default function CategoryNav() {
         </label>
 
         <div className="flex gap-2.5 overflow-x-auto no-scrollbar">
+          {OFERTAS.length > 0 && (
+            <a
+              href="#ofertas"
+              onClick={(e) => onCategoria(e, "ofertas")}
+              className={estiloBase + " border-amber-400/70 bg-amber-400/10 text-amber-300 hover:bg-amber-400 hover:text-black"}
+            >
+              % Ofertas
+            </a>
+          )}
+
           <a
             href="#corte-semana"
             onClick={(e) => onCategoria(e, "corte-semana")}
@@ -61,6 +71,10 @@ export default function CategoryNav() {
             }
           >
             ★ Corte de la semana
+          </a>
+
+          <a href="#calculadora" onClick={(e) => onCategoria(e, "calculadora")} className={estiloLink}>
+            Calcula tu asado
           </a>
 
           {categorias.map((cat) => (

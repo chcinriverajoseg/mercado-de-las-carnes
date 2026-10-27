@@ -12,6 +12,11 @@ import CartDrawer from "./components/CartDrawer";
 import StockPanel from "./components/StockPanel";
 import Splash from "./components/Splash";
 import SearchResults from "./components/SearchResults";
+import AnnouncementBar from "./components/AnnouncementBar";
+import Ofertas from "./components/Ofertas";
+import CalculadoraAsado from "./components/CalculadoraAsado";
+import FAQ from "./components/FAQ";
+import ProductSheet from "./components/ProductSheet";
 import { useShop } from "./context/useShop";
 import { categorias } from "./data/productos";
 
@@ -38,6 +43,7 @@ function App() {
   return (
     <>
       <Splash />
+      <AnnouncementBar />
       <div className="sticky top-0 z-50">
         <Header />
         <CategoryNav />
@@ -45,31 +51,37 @@ function App() {
 
       <main>
         <Hero />
-        <About />
         <DeliveryInfo />
 
         {buscando ? (
           <SearchResults />
         ) : (
-          categorias.map((categoria, index) => (
-            <CategorySection
-              key={categoria.id}
-              id={categoria.id}
-              nombre={categoria.nombre}
-              descripcion={categoria.descripcion}
-              productos={categoria.productos}
-              alterna={index % 2 === 1}
-              bgImage={imagenesPorCategoria[categoria.id]}
-            />
-          ))
+          <>
+            <Ofertas />
+            <Featured />
+            {categorias.map((categoria, index) => (
+              <CategorySection
+                key={categoria.id}
+                id={categoria.id}
+                nombre={categoria.nombre}
+                descripcion={categoria.descripcion}
+                productos={categoria.productos}
+                alterna={index % 2 === 0}
+                bgImage={imagenesPorCategoria[categoria.id]}
+              />
+            ))}
+            <CalculadoraAsado />
+          </>
         )}
 
-        <Featured />
+        <About />
+        <FAQ />
         <Location />
       </main>
       <Footer />
       <WhatsappFloat />
       <CartDrawer />
+      <ProductSheet />
       <StockPanel />
     </>
   );

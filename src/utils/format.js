@@ -47,3 +47,11 @@ export function normalizar(texto) {
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 }
+
+// Info de oferta: { enOferta, antes, ahorroPct } (ahorroPct solo si hay precio anterior mayor)
+export function ofertaInfo(producto) {
+  const ahora = parsePrecio(producto.precio);
+  const antes = parsePrecio(producto.precioAntes);
+  const ahorroPct = antes > ahora && ahora > 0 ? Math.round((1 - ahora / antes) * 100) : 0;
+  return { enOferta: Boolean(producto.oferta), antes: ahorroPct ? antes : 0, ahorroPct };
+}
