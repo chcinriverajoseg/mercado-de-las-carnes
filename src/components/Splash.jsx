@@ -6,8 +6,12 @@ import logo from "../assets/logo-inicio.webp";
 //  1) el logo se revela desde el centro (círculo) con efecto de enfoque
 //  2) un destello recorre el logo, suben chispas rojas y aparece el lema
 //  3) dos cortinas se abren hacia los lados y se revela la página
-const ENTRADA_MS = 2400; // cuándo empiezan a abrirse las cortinas
-const SALIDA_MS = 900; // cuánto tardan las cortinas en abrirse
+const ENTRADA_MS = 3000; // cuándo empiezan a abrirse las cortinas
+const SALIDA_MS = 1000; // cuánto tardan las cortinas en abrirse
+
+// true = se ve cada vez que se abre o recarga la página.
+// false = solo la primera vez por pestaña (no hace esperar al recargar).
+const MOSTRAR_SIEMPRE = true;
 
 const CHISPAS = Array.from({ length: 16 }, (_, i) => ({
   left: (i * 37 + 11) % 100,
@@ -18,8 +22,8 @@ const CHISPAS = Array.from({ length: 16 }, (_, i) => ({
 
 export default function Splash() {
   const reducir = useReducedMotion();
-  // Se muestra solo la primera vez por sesión: al recargar o volver no hace esperar.
   const [fase, setFase] = useState(() => {
+    if (MOSTRAR_SIEMPRE) return "entrada";
     try {
       return sessionStorage.getItem("mdc-splash") ? "fuera" : "entrada";
     } catch {
