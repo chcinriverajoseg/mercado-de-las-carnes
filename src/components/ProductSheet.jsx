@@ -86,13 +86,13 @@ function Contenido({ producto, cerrar }) {
       <div className="p-5 sm:p-7 flex flex-col">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[11px] uppercase tracking-[3px] text-brand-red font-semibold">{producto.categoria}</p>
+            <p className="text-[11px] uppercase tracking-[3px] text-brand-red-text font-semibold">{producto.categoria}</p>
             <h2 className="font-display text-2xl sm:text-3xl mt-1 leading-tight">{producto.nombre}</h2>
           </div>
           <button
             onClick={cerrar}
             aria-label="Cerrar"
-            className="hidden sm:block text-brand-gray hover:text-brand-red text-2xl leading-none"
+            className="hidden sm:block text-brand-gray hover:text-brand-red-text text-2xl leading-none"
           >
             ×
           </button>
@@ -115,7 +115,7 @@ function Contenido({ producto, cerrar }) {
         </div>
 
         <div className="flex items-baseline gap-2 mt-4">
-          <span className="font-display text-brand-red text-3xl">{producto.precio}</span>
+          <span className="font-display text-brand-red-text text-3xl">{producto.precio}</span>
           {oferta.antes > 0 && <span className="text-sm text-brand-gray line-through">{formatCLP(oferta.antes)}</span>}
           <span className="text-sm text-brand-gray">{producto.unidad}</span>
         </div>
@@ -146,7 +146,7 @@ function Contenido({ producto, cerrar }) {
                 <button
                   onClick={() => cambiar(-1)}
                   aria-label="Menos"
-                  className="w-9 h-9 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red"
+                  className="w-9 h-9 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red-text"
                 >
                   −
                 </button>
@@ -154,7 +154,7 @@ function Contenido({ producto, cerrar }) {
                 <button
                   onClick={() => cambiar(1)}
                   aria-label="Más"
-                  className="w-9 h-9 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red"
+                  className="w-9 h-9 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red-text"
                 >
                   +
                 </button>
@@ -169,7 +169,7 @@ function Contenido({ producto, cerrar }) {
               addItem(producto, cantidad);
               cerrar();
             }}
-            className="w-full bg-brand-red hover:bg-red-600 disabled:bg-brand-panel-2 disabled:text-brand-gray disabled:cursor-not-allowed text-brand-cream font-bold text-sm uppercase tracking-wide py-3.5 rounded-sm transition"
+            className="w-full bg-brand-red hover:bg-[#d81f1a] disabled:bg-brand-panel-2 disabled:text-brand-gray disabled:cursor-not-allowed text-brand-cream font-bold text-sm uppercase tracking-wide py-3.5 rounded-sm transition"
           >
             {agotado ? "Agotado" : "Agregar al carrito"}
           </button>
@@ -177,7 +177,7 @@ function Contenido({ producto, cerrar }) {
             href={waLink(`Hola, quería consultar por ${producto.nombre}`)}
             target="_blank"
             rel="noopener"
-            className="block text-center text-xs text-brand-cream-dim hover:text-brand-red mt-3 underline underline-offset-4"
+            className="block text-center text-xs text-brand-cream-dim hover:text-brand-red-text mt-3 underline underline-offset-4"
           >
             {agotado ? "Avísame cuando vuelva a llegar" : "¿Lo quieres en un corte o grosor especial? Pregúntanos"}
           </a>

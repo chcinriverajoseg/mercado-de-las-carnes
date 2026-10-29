@@ -19,6 +19,8 @@ export default function Hero() {
       >
         <img
           src={heroBg}
+          width="1800"
+          height="798"
           alt="Fachada de Mercado de las Carnes"
           fetchPriority="high"
           className="block w-full h-auto"
@@ -31,7 +33,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-block text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-4"
+          className="inline-block text-xs tracking-[4px] uppercase text-brand-red-text font-semibold mb-4"
         >
           Carnicería de barrio · Concón
         </motion.span>
@@ -43,7 +45,7 @@ export default function Hero() {
           className="font-display text-4xl sm:text-6xl leading-tight mb-6"
         >
           Carne de verdad,<br />
-          cortada como <span className="text-brand-red whitespace-nowrap">se debe</span>
+          cortada como <span className="text-brand-red-text whitespace-nowrap">se debe</span>
         </motion.h1>
 
         <motion.p
@@ -66,13 +68,13 @@ export default function Hero() {
             href={waLink()}
             target="_blank"
             rel="noopener"
-            className="bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm px-8 py-4 rounded-sm shadow-lg shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
+            className="bg-brand-red hover:bg-[#d81f1a] text-brand-cream font-bold text-sm px-8 py-4 rounded-sm shadow-lg shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
           >
             Hacer un pedido
           </a>
           <a
             href="#vacuno"
-            className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red text-sm font-semibold px-8 py-4 rounded-sm transition"
+            className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red-text text-sm font-semibold px-8 py-4 rounded-sm transition"
           >
             Ver catálogo
           </a>

@@ -34,7 +34,7 @@ export default function StockPanel() {
                 <button
                   onClick={closeStock}
                   aria-label="Cerrar"
-                  className="text-brand-gray hover:text-brand-red text-xl leading-none px-1"
+                  className="text-brand-gray hover:text-brand-red-text text-xl leading-none px-1"
                 >
                   ×
                 </button>

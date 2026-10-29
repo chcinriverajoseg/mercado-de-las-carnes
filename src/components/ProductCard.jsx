@@ -14,7 +14,9 @@ const fadeUp = {
 // Pesos rápidos para productos por kilo (como en las carnicerías online grandes).
 const PESOS = [0.5, 1, 2];
 
-export default function ProductCard({ producto, categoriaId, alterna = false, index = 0 }) {
+// conMarco: si otras tarjetas de la misma lista tienen foto, esta muestra un recuadro
+// del mismo tamaño (con el ícono) para que todas queden parejas.
+export default function ProductCard({ producto, categoriaId, alterna = false, index = 0, conMarco = false }) {
   const { addItem, openFicha } = useShop();
   const porKilo = esPorKilo(producto.unidad);
   const [cantidad, setCantidad] = useState(1);
@@ -39,22 +41,29 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
         (alterna ? "bg-gradient-to-b from-brand-panel-2 to-brand-panel" : "bg-gradient-to-b from-brand-panel to-black/40")
       }
     >
-      {foto && (
+      {(foto || conMarco) && (
         <button
           type="button"
           onClick={abrirFicha}
           aria-label={"Ver detalle de " + producto.nombre}
           className="block -mx-3 -mt-3 sm:-mx-6 sm:-mt-6 mb-3 sm:mb-4 aspect-square sm:aspect-[4/3] overflow-hidden rounded-t-xl bg-brand-panel-2"
         >
-          <img
-            src={foto}
-            alt={producto.nombre}
-            loading="lazy"
-            className={
-              "h-full w-full object-cover transition-transform duration-500 hover:scale-105 " +
-              (agotado ? "grayscale opacity-60" : "")
-            }
-          />
+          {foto ? (
+            <img
+              src={foto}
+              alt={producto.nombre}
+              loading="lazy"
+              className={
+                "h-full w-full object-cover transition-transform duration-500 hover:scale-105 " +
+                (agotado ? "grayscale opacity-60" : "")
+              }
+            />
+          ) : (
+            <span className="h-full w-full flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-brand-panel-2 to-brand-bg text-brand-red/50">
+              <CategoryIcon id={categoriaId} className="w-12 h-12 sm:w-16 sm:h-16" />
+              <span className="text-[10px] uppercase tracking-[2px] text-brand-gray">Foto pronto</span>
+            </span>
+          )}
         </button>
       )}
 
@@ -71,13 +80,13 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
       )}
 
       <div className="flex items-start gap-3 mb-1 sm:mb-2">
-        {!foto && (
-          <div className="hidden sm:flex w-9 h-9 shrink-0 rounded-lg bg-brand-red/10 flex items-center justify-center text-brand-red">
+        {!foto && !conMarco && (
+          <div className="hidden sm:flex w-9 h-9 shrink-0 rounded-lg bg-brand-red/10 flex items-center justify-center text-brand-red-text">
             <CategoryIcon id={categoriaId} className="w-5 h-5" />
           </div>
         )}
         <h3 className="font-semibold text-sm sm:text-base leading-snug sm:pt-1">
-          <button type="button" onClick={abrirFicha} className="text-left hover:text-brand-red transition-colors">
+          <button type="button" onClick={abrirFicha} className="text-left hover:text-brand-red-text transition-colors">
             {producto.nombre}
           </button>
         </h3>
@@ -103,7 +112,7 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
       <div className="mt-auto">
         <div className="flex flex-wrap items-baseline justify-between gap-x-2 border-t border-dashed border-brand-line pt-2 sm:pt-3 mb-2 sm:mb-3">
           <span className="flex flex-wrap items-baseline gap-x-2">
-            <span className="font-display text-brand-red text-base sm:text-lg">{producto.precio}</span>
+            <span className="font-display text-brand-red-text text-base sm:text-lg">{producto.precio}</span>
             {oferta.antes > 0 && (
               <span className="text-[11px] sm:text-xs text-brand-gray line-through">{formatCLP(oferta.antes)}</span>
             )}
@@ -139,7 +148,7 @@ export default function ProductCard({ producto, categoriaId, alterna = false, in
             "w-full text-[11px] sm:text-xs font-bold uppercase tracking-wide px-2 sm:px-4 py-2.5 rounded-sm transition-all " +
             (agotado
               ? "bg-brand-panel-2 text-brand-gray cursor-not-allowed"
-              : "bg-brand-red hover:bg-red-600 text-brand-cream shadow-md shadow-brand-red/30 hover:shadow-brand-red/50")
+              : "bg-brand-red hover:bg-[#d81f1a] text-brand-cream shadow-md shadow-brand-red/30 hover:shadow-brand-red/50")
           }
         >
           {agotado ? (

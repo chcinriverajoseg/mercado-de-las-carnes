@@ -8,11 +8,11 @@ export default function Location() {
     encodeURIComponent(`${NEGOCIO.nombre} ${NEGOCIO.direccion} ${NEGOCIO.comuna}`);
 
   return (
-    <section id="ubicacion" className="bg-brand-panel px-4 sm:px-6 py-24 scroll-mt-32">
+    <section id="ubicacion" className="bg-brand-panel px-4 sm:px-6 py-16 sm:py-24 scroll-mt-32">
       <div className="relative max-w-6xl mx-auto">
         <Mascota side="right" />
         <div className="text-center max-w-lg mx-auto mb-14">
-          <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-3 inline-block">
+          <span className="text-xs tracking-[4px] uppercase text-brand-red-text font-semibold mb-3 inline-block">
             Visítanos
           </span>
           <h2 className="font-display text-3xl sm:text-4xl">Ubicación y horarios</h2>
@@ -39,7 +39,7 @@ export default function Location() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener"
-                  className="text-sm font-semibold border border-brand-cream-dim hover:border-brand-red hover:text-brand-red px-4 py-2.5 rounded-sm transition"
+                  className="text-sm font-semibold border border-brand-cream-dim hover:border-brand-red hover:text-brand-red-text px-4 py-2.5 rounded-sm transition"
                 >
                   Cómo llegar
                 </a>
@@ -47,7 +47,7 @@ export default function Location() {
                   href={waLink("Hola, tengo una consulta")}
                   target="_blank"
                   rel="noopener"
-                  className="text-sm font-semibold bg-brand-red hover:bg-red-600 text-brand-cream px-4 py-2.5 rounded-sm transition"
+                  className="text-sm font-semibold bg-brand-red hover:bg-[#d81f1a] text-brand-cream px-4 py-2.5 rounded-sm transition"
                 >
                   Escribir por WhatsApp
                 </a>

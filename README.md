@@ -36,7 +36,13 @@ sin tildes y con guiones. Se asigna sola:
 - "Lomo vetado" → `lomo-vetado.jpg`
 - Foto especial para el corte de la semana → `corte-de-la-semana.webp`
 
-Formato recomendado: `.webp`, ~800 px de ancho, fondo blanco.
+**Después de copiar fotos nuevas, corre:**
+
+```bash
+npm run fotos
+```
+
+Convierte todas las fotos de `src/assets/productos/` a `.webp` de máximo 1000 px (una foto de celular de 4 MB queda en ~80 KB) y borra el original pesado. Puedes copiar la foto tal como sale del celular (`.jpg`, `.jpeg`, `.png`).
 
 > `src/assets/productoss/` (con doble s) guarda fotos de prueba que **no** se publican.
 > Solo se usan las de `src/assets/productos/`. Mientras un producto no tenga foto, su tarjeta muestra el ícono de la categoría.

@@ -70,7 +70,7 @@ export default function CartDrawer() {
                   <button
                     onClick={() => setPaso("carrito")}
                     aria-label="Volver al carrito"
-                    className="text-brand-gray hover:text-brand-red text-lg leading-none pr-1"
+                    className="text-brand-gray hover:text-brand-red-text text-lg leading-none pr-1"
                   >
                     ←
                   </button>
@@ -80,7 +80,7 @@ export default function CartDrawer() {
               <button
                 onClick={cerrar}
                 aria-label="Cerrar carrito"
-                className="text-brand-gray hover:text-brand-red text-2xl leading-none px-1"
+                className="text-brand-gray hover:text-brand-red-text text-2xl leading-none px-1"
               >
                 ×
               </button>
@@ -108,7 +108,7 @@ export default function CartDrawer() {
                             <button
                               onClick={() => stepItem(item.id, -1)}
                               aria-label="Quitar"
-                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
+                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red-text"
                             >
                               −
                             </button>
@@ -118,23 +118,23 @@ export default function CartDrawer() {
                             <button
                               onClick={() => stepItem(item.id, 1)}
                               aria-label="Agregar"
-                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red"
+                              className="w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-sm hover:border-brand-red hover:text-brand-red-text"
                             >
                               +
                             </button>
                           </div>
                         </div>
                         <div className="text-right shrink-0">
-                          <p className="text-sm font-semibold text-brand-red">
+                          <p className="text-sm font-semibold text-brand-red-text">
                             {item.precioNum ? formatCLP(item.precioNum * item.cantidad) : "—"}
                           </p>
-                          <button onClick={() => removeItem(item.id)} className="text-xs text-brand-gray hover:text-brand-red mt-1.5">
+                          <button onClick={() => removeItem(item.id)} className="text-xs text-brand-gray hover:text-brand-red-text mt-1.5">
                             Quitar
                           </button>
                         </div>
                       </div>
                     ))}
-                    <button onClick={clearCart} className="text-xs text-brand-gray hover:text-brand-red underline underline-offset-4">
+                    <button onClick={clearCart} className="text-xs text-brand-gray hover:text-brand-red-text underline underline-offset-4">
                       Vaciar carrito
                     </button>
                   </div>
@@ -270,7 +270,7 @@ export default function CartDrawer() {
               )}
               <div className="flex justify-between text-sm mb-1">
                 <span className="text-brand-cream-dim">Total estimado</span>
-                <span className="font-display text-brand-red text-lg">{formatCLP(totalPrice)}</span>
+                <span className="font-display text-brand-red-text text-lg">{formatCLP(totalPrice)}</span>
               </div>
               <p className="text-[11px] text-brand-gray mb-3">
                 {hayPreciosPorConfirmar ? "Hay productos con precio a confirmar. " : ""}
@@ -281,7 +281,7 @@ export default function CartDrawer() {
                 <button
                   onClick={() => setPaso("datos")}
                   disabled={items.length === 0}
-                  className="block w-full text-center bg-brand-red hover:bg-red-600 disabled:bg-brand-panel-2 disabled:text-brand-gray disabled:shadow-none disabled:cursor-not-allowed text-brand-cream font-bold text-sm px-5 py-3 rounded-sm shadow-lg shadow-brand-red/30 transition-all"
+                  className="block w-full text-center bg-brand-red hover:bg-[#d81f1a] disabled:bg-brand-panel-2 disabled:text-brand-gray disabled:shadow-none disabled:cursor-not-allowed text-brand-cream font-bold text-sm px-5 py-3 rounded-sm shadow-lg shadow-brand-red/30 transition-all"
                 >
                   Continuar
                 </button>

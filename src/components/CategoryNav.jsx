@@ -5,7 +5,7 @@ const estiloBase =
   "whitespace-nowrap text-xs font-semibold tracking-wide uppercase px-4 py-2 rounded-full border transition-all";
 const estiloLink =
   estiloBase +
-  " border-brand-line bg-brand-panel-2 text-brand-cream-dim hover:border-brand-red hover:text-brand-red hover:shadow-md hover:shadow-brand-red/20";
+  " border-brand-line bg-brand-panel-2 text-brand-cream-dim hover:border-brand-red hover:text-brand-red-text hover:shadow-md hover:shadow-brand-red/20";
 
 function irA(id) {
   // pequeño retraso para que React pinte la sección antes de hacer scroll
@@ -67,7 +67,7 @@ export default function CategoryNav() {
             onClick={(e) => onCategoria(e, "corte-semana")}
             className={
               estiloBase +
-              " border-brand-red bg-brand-red/15 text-brand-red hover:bg-brand-red hover:text-brand-cream hover:shadow-md hover:shadow-brand-red/30"
+              " border-brand-red bg-brand-red/15 text-brand-red-text hover:bg-brand-red hover:text-brand-cream hover:shadow-md hover:shadow-brand-red/30"
             }
           >
             ★ Corte de la semana
@@ -91,7 +91,7 @@ export default function CategoryNav() {
             }
           >
             Milanesa
-            <span className="text-[10px] normal-case tracking-normal bg-brand-red/20 text-brand-red px-2 py-0.5 rounded-full">
+            <span className="text-[10px] normal-case tracking-normal bg-brand-red/20 text-brand-red-text px-2 py-0.5 rounded-full">
               Próximamente
             </span>
           </span>

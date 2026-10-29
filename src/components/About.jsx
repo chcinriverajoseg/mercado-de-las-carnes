@@ -16,7 +16,7 @@ const fadeUp = {
 
 export default function About() {
   return (
-    <section id="nosotros" className="relative px-4 sm:px-6 py-24 overflow-hidden scroll-mt-32">
+    <section id="nosotros" className="relative px-4 sm:px-6 py-16 sm:py-24 overflow-hidden scroll-mt-32">
       <div className="absolute top-1/3 -left-24 w-[320px] h-[320px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -63,7 +63,7 @@ export default function About() {
           variants={fadeUp}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-2.5 inline-block">
+          <span className="text-xs tracking-[4px] uppercase text-brand-red-text font-semibold mb-2.5 inline-block">
             Nuestra historia
           </span>
           <h2 className="font-display text-3xl sm:text-4xl mb-5 lg:pr-32">
@@ -81,15 +81,15 @@ export default function About() {
 
           <div className="flex gap-6 sm:gap-9 mt-8 pt-7 border-t border-brand-line">
             <div>
-              <strong className="font-display text-brand-red text-2xl block mb-1">100%</strong>
+              <strong className="font-display text-brand-red-text text-2xl block mb-1">100%</strong>
               <span className="text-xs text-brand-gray uppercase tracking-wide">Carne fresca</span>
             </div>
             <div>
-              <strong className="font-display text-brand-red text-2xl block mb-1">7</strong>
+              <strong className="font-display text-brand-red-text text-2xl block mb-1">7</strong>
               <span className="text-xs text-brand-gray uppercase tracking-wide">Días atendiendo</span>
             </div>
             <div>
-              <strong className="font-display text-brand-red text-2xl block mb-1">+{Math.floor(TOTAL_PRODUCTOS / 10) * 10}</strong>
+              <strong className="font-display text-brand-red-text text-2xl block mb-1">+{Math.floor(TOTAL_PRODUCTOS / 10) * 10}</strong>
               <span className="text-xs text-brand-gray uppercase tracking-wide">Productos</span>
             </div>
           </div>

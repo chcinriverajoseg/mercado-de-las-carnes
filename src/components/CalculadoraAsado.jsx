@@ -48,7 +48,7 @@ function Contador({ etiqueta, valor, setValor, min = 0 }) {
         <button
           onClick={() => setValor(Math.max(min, valor - 1))}
           aria-label={"Menos " + etiqueta}
-          className="w-8 h-8 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red"
+          className="w-8 h-8 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red-text"
         >
           −
         </button>
@@ -56,7 +56,7 @@ function Contador({ etiqueta, valor, setValor, min = 0 }) {
         <button
           onClick={() => setValor(Math.min(80, valor + 1))}
           aria-label={"Más " + etiqueta}
-          className="w-8 h-8 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red"
+          className="w-8 h-8 rounded-full border border-brand-line hover:border-brand-red hover:text-brand-red-text"
         >
           +
         </button>
@@ -121,7 +121,7 @@ export default function CalculadoraAsado() {
     (activo ? "border-brand-red bg-brand-red/10" : "border-brand-line hover:border-brand-red/60");
 
   return (
-    <section id="calculadora" className="relative px-4 sm:px-6 py-24 bg-brand-panel border-y border-brand-line scroll-mt-32 overflow-hidden">
+    <section id="calculadora" className="relative px-4 sm:px-6 py-16 sm:py-24 bg-brand-panel border-y border-brand-line scroll-mt-32 overflow-hidden">
       <div className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[640px] h-[320px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -133,7 +133,7 @@ export default function CalculadoraAsado() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-xl mx-auto mb-12"
         >
-          <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-3 inline-block">
+          <span className="text-xs tracking-[4px] uppercase text-brand-red-text font-semibold mb-3 inline-block">
             Calculadora de asado
           </span>
           <h2 className="font-display text-3xl sm:text-4xl mb-3">¿Cuánta carne compro?</h2>
@@ -219,7 +219,7 @@ export default function CalculadoraAsado() {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-sm font-semibold">{formatCantidad(f.cantidad, "/ kilo")}</p>
-                    <p className="text-xs text-brand-red">{formatCLP(f.subtotal)}</p>
+                    <p className="text-xs text-brand-red-text">{formatCLP(f.subtotal)}</p>
                   </div>
                 </li>
               ))}
@@ -228,7 +228,7 @@ export default function CalculadoraAsado() {
                   <span className="text-brand-cream-dim">{f.producto.nombre}</span>
                   <span className="text-right">
                     <span className="font-semibold">{formatCantidad(f.cantidad, f.producto.unidad)}</span>
-                    <span className="block text-xs text-brand-red">{formatCLP(f.subtotal)}</span>
+                    <span className="block text-xs text-brand-red-text">{formatCLP(f.subtotal)}</span>
                   </span>
                 </li>
               ))}
@@ -237,13 +237,13 @@ export default function CalculadoraAsado() {
             <div className="mt-6 pt-5 border-t border-brand-line">
               <div className="flex items-baseline justify-between">
                 <span className="text-brand-cream-dim">Total estimado</span>
-                <span className="font-display text-3xl text-brand-red">{formatCLP(plan.total)}</span>
+                <span className="font-display text-3xl text-brand-red-text">{formatCLP(plan.total)}</span>
               </div>
               <p className="text-xs text-brand-gray text-right mt-1">≈ {formatCLP(plan.porPersona)} por persona</p>
 
               <button
                 onClick={agregarTodo}
-                className="mt-5 w-full bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm uppercase tracking-wide py-3.5 rounded-sm shadow-lg shadow-brand-red/30 transition"
+                className="mt-5 w-full bg-brand-red hover:bg-[#d81f1a] text-brand-cream font-bold text-sm uppercase tracking-wide py-3.5 rounded-sm shadow-lg shadow-brand-red/30 transition"
               >
                 Agregar todo al carrito
               </button>

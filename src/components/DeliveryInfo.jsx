@@ -61,11 +61,11 @@ export default function DeliveryInfo() {
             transition={{ duration: 0.45, delay: i * 0.08 }}
             className="flex items-center gap-4 bg-brand-panel-2 border border-brand-line rounded-lg p-5 shadow-lg shadow-black/20"
           >
-            <div className="w-11 h-11 shrink-0 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-brand-red">
+            <div className="w-11 h-11 shrink-0 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-brand-red-text">
               {item.icon}
             </div>
             <div>
-              <h3 className="font-semibold text-sm">{item.titulo}</h3>
+              <h2 className="font-semibold text-sm">{item.titulo}</h2>
               <p className="text-brand-cream-dim text-sm">{item.detalle}</p>
             </div>
           </motion.div>

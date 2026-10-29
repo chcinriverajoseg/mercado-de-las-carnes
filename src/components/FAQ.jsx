@@ -47,20 +47,20 @@ const PREGUNTAS = [
 
 export default function FAQ() {
   return (
-    <section id="preguntas" className="relative px-4 sm:px-6 py-24 scroll-mt-32">
+    <section id="preguntas" className="relative px-4 sm:px-6 py-16 sm:py-24 scroll-mt-32">
       <div className="relative max-w-3xl mx-auto">
         <Mascota side="right" />
         <div className="text-center mb-12">
-          <span className="text-xs tracking-[4px] uppercase text-brand-red font-semibold mb-3 inline-block">Ayuda</span>
+          <span className="text-xs tracking-[4px] uppercase text-brand-red-text font-semibold mb-3 inline-block">Ayuda</span>
           <h2 className="font-display text-3xl sm:text-4xl">Preguntas frecuentes</h2>
         </div>
 
         <div className="divide-y divide-brand-line border-y border-brand-line">
           {PREGUNTAS.map((q) => (
             <details key={q.p} className="group py-1">
-              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none py-4 font-semibold hover:text-brand-red transition-colors [&::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none py-4 font-semibold hover:text-brand-red-text transition-colors [&::-webkit-details-marker]:hidden">
                 {q.p}
-                <span className="shrink-0 w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-brand-red transition-transform group-open:rotate-45">
+                <span className="shrink-0 w-7 h-7 rounded-full border border-brand-line flex items-center justify-center text-brand-red-text transition-transform group-open:rotate-45">
                   +
                 </span>
               </summary>
@@ -71,7 +71,7 @@ export default function FAQ() {
 
         <p className="text-center text-sm text-brand-cream-dim mt-10">
           ¿Otra duda?{" "}
-          <a href={waLink("Hola, tengo una consulta")} target="_blank" rel="noopener" className="text-brand-red font-semibold hover:underline underline-offset-4">
+          <a href={waLink("Hola, tengo una consulta")} target="_blank" rel="noopener" className="text-brand-red-text font-semibold hover:underline underline-offset-4">
             Escríbenos por WhatsApp
           </a>
         </p>

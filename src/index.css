@@ -4,7 +4,8 @@
   --color-brand-bg: #0c0c0c;
   --color-brand-panel: #161514;
   --color-brand-panel-2: #1f1c1a;
-  --color-brand-red: #d81f1a;
+  --color-brand-red: #c41d18; /* fondos y botones (texto crema encima: contraste AA) */
+  --color-brand-red-text: #ef5a54; /* textos rojos sobre fondo oscuro (contraste AA) */
   --color-brand-red-dark: #8a1410;
   --color-brand-cream: #f4ede0;
   --color-brand-cream-dim: #cfc6b5;

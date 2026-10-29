@@ -5,6 +5,7 @@ import Mascota from "./Mascota";
 import ProductCard from "./ProductCard";
 import { USOS } from "../data/productos";
 import { parsePrecio } from "../utils/format";
+import { fotoProducto } from "../utils/fotos";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -45,17 +46,18 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
   const ordenados = ordenar(filtrados, criterio);
   const lista = verTodos ? ordenados : ordenados.slice(0, VISIBLES);
   const ocultos = ordenados.length - VISIBLES;
+  const conMarco = lista.some((p) => fotoProducto(p.nombre));
 
   const chip = (activo) =>
     "whitespace-nowrap text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-colors " +
     (activo
       ? "border-brand-red bg-brand-red text-brand-cream"
-      : "border-brand-line bg-brand-bg/60 text-brand-cream-dim hover:border-brand-red hover:text-brand-red");
+      : "border-brand-line bg-brand-bg/60 text-brand-cream-dim hover:border-brand-red hover:text-brand-red-text");
 
   return (
     <section
       id={id}
-      className={"relative px-4 sm:px-6 py-20 scroll-mt-32 overflow-hidden " + (alterna ? "bg-brand-panel" : "")}
+      className={"relative px-4 sm:px-6 py-14 sm:py-20 scroll-mt-32 overflow-hidden " + (alterna ? "bg-brand-panel" : "")}
     >
       {/* foto de fondo opcional, por categoría */}
       {bgImage && (
@@ -84,7 +86,7 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
           variants={fadeUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-brand-red">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-brand-red-text">
             <CategoryIcon id={id} className="w-6 h-6" />
           </div>
           <h2 className="font-display text-3xl sm:text-4xl mb-3">{nombre}</h2>
@@ -126,7 +128,7 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {lista.map((producto, i) => (
-            <ProductCard key={producto.id} producto={producto} categoriaId={id} alterna={alterna} index={i} />
+            <ProductCard key={producto.id} producto={producto} categoriaId={id} alterna={alterna} index={i} conMarco={conMarco} />
           ))}
         </div>
 
@@ -137,7 +139,7 @@ export default function CategorySection({ id, nombre, descripcion, productos, al
                 if (verTodos) document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
                 setVerTodos((v) => !v);
               }}
-              className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red text-sm font-semibold px-8 py-3.5 rounded-sm transition"
+              className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red-text text-sm font-semibold px-8 py-3.5 rounded-sm transition"
             >
               {verTodos ? "Mostrar menos" : `Ver los ${ordenados.length} productos${uso ? " para " + USOS[uso].toLowerCase() : ""}`}
             </button>

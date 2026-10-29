@@ -4,12 +4,15 @@ import ProductCard from "./ProductCard";
 import { OFERTAS } from "../data/productos";
 import { NEGOCIO } from "../data/negocio";
 import { formatCLP } from "../utils/format";
+import { fotoProducto } from "../utils/fotos";
+
+const CON_MARCO = OFERTAS.some((p) => fotoProducto(p.nombre));
 
 export default function Ofertas() {
   if (OFERTAS.length === 0) return null;
 
   return (
-    <section id="ofertas" className="relative px-4 sm:px-6 py-20 scroll-mt-32 overflow-hidden">
+    <section id="ofertas" className="relative px-4 sm:px-6 py-14 sm:py-20 scroll-mt-32 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(251,191,36,0.10),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -34,7 +37,7 @@ export default function Ofertas() {
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {OFERTAS.map((p, i) => (
-            <ProductCard key={p.id} producto={p} categoriaId={p.categoriaId} index={i} />
+            <ProductCard key={p.id} producto={p} categoriaId={p.categoriaId} index={i} conMarco={CON_MARCO} />
           ))}
         </div>
       </div>

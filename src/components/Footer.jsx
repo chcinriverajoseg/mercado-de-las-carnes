@@ -12,7 +12,7 @@ function Columna({ titulo, children }) {
   );
 }
 
-const linkCls = "hover:text-brand-red transition-colors";
+const linkCls = "hover:text-brand-red-text transition-colors";
 
 function IconoInstagram() {
   return (
@@ -76,7 +76,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-8">
         <div className="grid grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-x-8 gap-y-10 mb-12">
           <div className="col-span-2 lg:col-span-1">
-            <img src={logo} alt={NEGOCIO.nombre} className="h-14 w-auto mb-4" loading="lazy" />
+            <img src={logo} width="1000" height="611" alt={NEGOCIO.nombre} className="h-14 w-auto mb-4" loading="lazy" />
             <p className="text-sm text-brand-cream-dim max-w-xs">
               Carnicería de barrio en {NEGOCIO.comuna}. Vacuno, cerdo, pollo, fiambrería, abarrotes y empanadas, con
               despacho {NEGOCIO.despachoTodosLosDias ? "todos los días " : ""}en {NEGOCIO.zonaDespacho}.
@@ -91,7 +91,7 @@ export default function Footer() {
                     rel="noopener"
                     aria-label={r.label}
                     title={r.label}
-                    className="w-10 h-10 rounded-full border border-brand-line flex items-center justify-center text-brand-cream-dim hover:border-brand-red hover:text-brand-red transition-colors"
+                    className="w-10 h-10 rounded-full border border-brand-line flex items-center justify-center text-brand-cream-dim hover:border-brand-red hover:text-brand-red-text transition-colors"
                   >
                     {r.icono}
                   </a>
@@ -164,7 +164,7 @@ export default function Footer() {
           </span>
           <span>
             Sitio desarrollado por{" "}
-            <a href="https://chacinpc.vercel.app" target="_blank" rel="noopener" className="hover:text-brand-red">
+            <a href="https://chacinpc.vercel.app" target="_blank" rel="noopener" className="hover:text-brand-red-text">
               ChacinPC
             </a>
           </span>

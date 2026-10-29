@@ -33,7 +33,7 @@ export default function Featured() {
             <p className="text-brand-cream-dim mb-5">{CORTE_SEMANA.texto}</p>
             {producto && (
               <p className="mb-6">
-                <span className="font-display text-brand-red text-2xl">{producto.precio}</span>{" "}
+                <span className="font-display text-brand-red-text text-2xl">{producto.precio}</span>{" "}
                 <span className="text-sm text-brand-gray">{producto.unidad}</span>
               </p>
             )}
@@ -41,7 +41,7 @@ export default function Featured() {
               {disponible && (
                 <button
                   onClick={() => addItem(producto, 1)}
-                  className="bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm px-7 py-3.5 rounded-sm shadow-lg shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
+                  className="bg-brand-red hover:bg-[#d81f1a] text-brand-cream font-bold text-sm px-7 py-3.5 rounded-sm shadow-lg shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
                 >
                   Agregar 1 kg al carrito
                 </button>
@@ -50,7 +50,7 @@ export default function Featured() {
                 href={waLink(`Hola, quiero consultar por la ${CORTE_SEMANA.titulo.toLowerCase()}`)}
                 target="_blank"
                 rel="noopener"
-                className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red text-sm font-semibold px-7 py-3.5 rounded-sm transition"
+                className="border border-brand-cream-dim hover:border-brand-red hover:text-brand-red-text text-sm font-semibold px-7 py-3.5 rounded-sm transition"
               >
                 Consultar disponibilidad
               </a>

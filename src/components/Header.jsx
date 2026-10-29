@@ -38,7 +38,7 @@ export default function Header() {
     <header className="bg-brand-bg/95 backdrop-blur-sm border-b border-brand-line">
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <a href="#" aria-label="Ir al inicio"><img src={logo} alt="Mercado de las Carnes" className="h-11 sm:h-12 w-auto shrink-0 rounded-sm" /></a>
+          <a href="#" aria-label="Ir al inicio"><img src={logo} width="1000" height="611" alt="Mercado de las Carnes" className="h-11 sm:h-12 w-auto shrink-0 rounded-sm" /></a>
           <span className="hidden md:block text-[11px] tracking-wide text-brand-cream-dim">
             Carnes frescas · Delivery · Concón
           </span>
@@ -49,7 +49,7 @@ export default function Header() {
             onClick={toggleStock}
             aria-label="Ver stock disponible"
             title="Ver stock disponible"
-            className="flex items-center gap-1.5 text-brand-cream-dim hover:text-brand-red border border-brand-line hover:border-brand-red rounded-sm px-3 py-2.5 transition-colors"
+            className="flex items-center gap-1.5 text-brand-cream-dim hover:text-brand-red-text border border-brand-line hover:border-brand-red rounded-sm px-3 py-2.5 transition-colors"
           >
             <StockIcon />
             <span className="hidden md:inline text-xs font-semibold uppercase tracking-wide">Stock</span>
@@ -59,7 +59,7 @@ export default function Header() {
             onClick={toggleCart}
             aria-label="Ver carrito"
             title="Ver carrito"
-            className="relative flex items-center gap-1.5 text-brand-cream-dim hover:text-brand-red border border-brand-line hover:border-brand-red rounded-sm px-3 py-2.5 transition-colors"
+            className="relative flex items-center gap-1.5 text-brand-cream-dim hover:text-brand-red-text border border-brand-line hover:border-brand-red rounded-sm px-3 py-2.5 transition-colors"
           >
             <CartIcon />
             <span className="hidden md:inline text-xs font-semibold uppercase tracking-wide">Carrito</span>
@@ -74,7 +74,7 @@ export default function Header() {
             href={waLink()}
             target="_blank"
             rel="noopener"
-            className="hidden sm:flex items-center gap-2 bg-brand-red hover:bg-red-600 text-brand-cream font-bold text-sm px-5 py-2.5 rounded-sm shadow-md shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
+            className="hidden sm:flex items-center gap-2 bg-brand-red hover:bg-[#d81f1a] text-brand-cream font-bold text-sm px-5 py-2.5 rounded-sm shadow-md shadow-brand-red/30 hover:shadow-brand-red/50 transition-all"
           >
             <WhatsAppIcon className="shrink-0" />
             Pedir por WhatsApp
