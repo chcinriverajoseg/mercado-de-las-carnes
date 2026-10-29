@@ -51,7 +51,7 @@ export const categorias = [
       { id: "v34", nombre: "Pollo barriga", desc: "Corte jugoso y sabroso, ideal para la parrilla o al horno.", precio: "$19.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
       { id: "v35", nombre: "Pollo ganso", desc: "Corte magro y alargado, perfecto para mechar o al horno.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["horno", "olla"] },
       { id: "v36", nombre: "Posta negra", desc: "Corte magro y rendidor de la pierna. Para bistec, milanesas o al horno.", precio: "$13.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno"] },
-      { id: "v44", nombre: "Posta rosada", desc: "Corte magro y tierno de la pierna. Ideal para bistec, escalopas y milanesas.", precio: "Consultar", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno"] },
+      { id: "v44", nombre: "Posta rosada", desc: "Corte magro y tierno de la pierna. Ideal para bistec, escalopas y milanesas.", precio: "$13.998", unidad: "/ kilo", stock: 10, usos: ["sarten", "horno"] },
       { id: "v37", nombre: "Punta ganso", desc: "Corte jugoso con su capa de grasa. Excelente a la parrilla o al horno.", precio: "$21.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
       { id: "v38", nombre: "Punta picana", desc: "Corte triangular con su grasa, muy sabroso. Ideal entero a la parrilla o al horno.", precio: "$13.998", unidad: "/ kilo", stock: 10, usos: ["parrilla", "horno"] },
       { id: "v39", nombre: "Sobrecostilla", desc: "Corte con veta y mucho sabor: a la parrilla o en cocciones lentas.", precio: "$12.498", unidad: "/ kilo", stock: 10, usos: ["parrilla", "olla"] },
