@@ -43,6 +43,11 @@ export const NEGOCIO = {
 // Pega aquí el enlace "Publicar en la web" en formato CSV. Vacío = se usan los precios de productos.js.
 export const PLANILLA_URL = "";
 
+// Enlace de EDICIÓN de esa planilla. Lo abre el botón "Panel del local" del pie de página.
+// Google pide iniciar sesión: solo quienes tengan permiso pueden editar. Vacío = no se muestra el botón.
+export const PANEL_URL =
+  "https://docs.google.com/spreadsheets/d/1pxTWfGF6RREVQ6sCm8rvxGjWRq6G5NiYYMS6-5LREIg/edit";
+
 // Redes y comunidad. Pega aquí los enlaces reales: lo que quede vacío no se muestra.
 export const REDES = {
   instagram: "", // ej: "https://instagram.com/mercadodelascarnes"

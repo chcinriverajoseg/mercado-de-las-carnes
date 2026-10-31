@@ -1,4 +1,4 @@
-import { NEGOCIO, REDES, FORMAS_PAGO, waLink } from "../data/negocio";
+import { NEGOCIO, REDES, FORMAS_PAGO, PANEL_URL, waLink } from "../data/negocio";
 import { useCatalogo } from "../context/useCatalogo";
 import { formatCLP } from "../utils/format";
 import logo from "../assets/logo-inicio.webp";
@@ -164,6 +164,24 @@ export default function Footer() {
             © {new Date().getFullYear()} {NEGOCIO.nombre}. Todos los derechos reservados.
           </span>
           <span>
+            {PANEL_URL && (
+              <>
+                <a
+                  href={PANEL_URL}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="inline-flex items-center gap-1 hover:text-brand-red-text"
+                  title="Acceso para el local: editar precios, stock y ofertas"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                    <rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.8" />
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                  Panel del local
+                </a>
+                {" · "}
+              </>
+            )}
             Sitio desarrollado por{" "}
             <a href="https://chacinpc.vercel.app" target="_blank" rel="noopener" className="hover:text-brand-red-text">
               ChacinPC
