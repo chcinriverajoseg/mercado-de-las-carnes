@@ -39,6 +39,10 @@ export const NEGOCIO = {
   franjas: ["Mañana (10:00 – 13:00)", "Tarde (15:00 – 19:00)"],
 };
 
+// Planilla de Google con precios, stock y ofertas (ver README → "Planilla de precios").
+// Pega aquí el enlace "Publicar en la web" en formato CSV. Vacío = se usan los precios de productos.js.
+export const PLANILLA_URL = "";
+
 // Redes y comunidad. Pega aquí los enlaces reales: lo que quede vacío no se muestra.
 export const REDES = {
   instagram: "", // ej: "https://instagram.com/mercadodelascarnes"

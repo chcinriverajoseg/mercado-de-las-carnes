@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Mascota from "./Mascota";
 import fachada from "../assets/hero-bg.webp";
 import { fotoProducto } from "../utils/fotos";
-import { TOTAL_PRODUCTOS } from "../data/productos";
+import { useCatalogo } from "../context/useCatalogo";
 
 const fotoA = fotoProducto("Asado de tira");
 const fotoB = fotoProducto("Lomo vetado");
@@ -15,6 +15,7 @@ const fadeUp = {
 };
 
 export default function About() {
+  const { total } = useCatalogo();
   return (
     <section id="nosotros" className="relative px-4 sm:px-6 py-16 sm:py-24 overflow-hidden scroll-mt-32">
       <div className="absolute top-1/3 -left-24 w-[320px] h-[320px] rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
@@ -89,7 +90,7 @@ export default function About() {
               <span className="text-xs text-brand-gray uppercase tracking-wide">Días atendiendo</span>
             </div>
             <div>
-              <strong className="font-display text-brand-red-text text-2xl block mb-1">+{Math.floor(TOTAL_PRODUCTOS / 10) * 10}</strong>
+              <strong className="font-display text-brand-red-text text-2xl block mb-1">+{Math.floor(total / 10) * 10}</strong>
               <span className="text-xs text-brand-gray uppercase tracking-wide">Productos</span>
             </div>
           </div>

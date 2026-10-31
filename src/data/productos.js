@@ -148,20 +148,6 @@ export const CORTE_SEMANA = {
     "preparar al jugo o a la plancha. Cantidad limitada.",
 };
 
-export function buscarProducto(id) {
-  for (const cat of categorias) {
-    const p = cat.productos.find((x) => x.id === id);
-    if (p) return { ...p, categoriaId: cat.id, categoria: cat.nombre };
-  }
-  return null;
-}
-
-export const TOTAL_PRODUCTOS = categorias.reduce((s, c) => s + c.productos.length, 0);
-
-export const OFERTAS = categorias.flatMap((cat) =>
-  cat.productos.filter((p) => p.oferta).map((p) => ({ ...p, categoriaId: cat.id, categoria: cat.nombre }))
-);
-
 // Nombres e íconos de los usos de cocina.
 export const USOS = {
   parrilla: "Parrilla",

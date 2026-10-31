@@ -1,5 +1,5 @@
 import { NEGOCIO, REDES, FORMAS_PAGO, waLink } from "../data/negocio";
-import { categorias, OFERTAS } from "../data/productos";
+import { useCatalogo } from "../context/useCatalogo";
 import { formatCLP } from "../utils/format";
 import logo from "../assets/logo-inicio.webp";
 
@@ -45,6 +45,7 @@ function IconoGoogle() {
 }
 
 export default function Footer() {
+  const { categorias, ofertas } = useCatalogo();
   const redes = [
     REDES.instagram && { href: REDES.instagram, label: "Instagram", icono: <IconoInstagram /> },
     REDES.grupoWhatsapp && { href: REDES.grupoWhatsapp, label: "Grupo de WhatsApp", icono: <IconoWhatsapp /> },
@@ -101,7 +102,7 @@ export default function Footer() {
           </div>
 
           <Columna titulo="Tienda">
-            {OFERTAS.length > 0 && (
+            {ofertas.length > 0 && (
               <li>
                 <a href="#ofertas" className={linkCls}>Ofertas de la semana</a>
               </li>

@@ -18,7 +18,7 @@ import CalculadoraAsado from "./components/CalculadoraAsado";
 import FAQ from "./components/FAQ";
 import ProductSheet from "./components/ProductSheet";
 import { useShop } from "./context/useShop";
-import { categorias } from "./data/productos";
+import { useCatalogo } from "./context/useCatalogo";
 
 import vacunoBg from "./assets/vacuno-bg.webp";
 import cerdoBg from "./assets/cerdo-bg.webp";
@@ -38,6 +38,7 @@ const imagenesPorCategoria = {
 
 function App() {
   const { busqueda } = useShop();
+  const { categorias } = useCatalogo();
   const buscando = busqueda.trim().length > 0;
 
   return (

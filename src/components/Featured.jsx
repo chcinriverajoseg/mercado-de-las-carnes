@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import Mascota from "./Mascota";
 import { waLink } from "../data/negocio";
-import { CORTE_SEMANA, buscarProducto } from "../data/productos";
+import { CORTE_SEMANA } from "../data/productos";
+import { useCatalogo } from "../context/useCatalogo";
 import { fotoProducto } from "../utils/fotos";
 import { useShop } from "../context/useShop";
 
 export default function Featured() {
   const { addItem } = useShop();
-  const producto = buscarProducto(CORTE_SEMANA.id);
+  const { buscar } = useCatalogo();
+  const producto = buscar(CORTE_SEMANA.id);
   // Foto: primero "corte-de-la-semana.*", si no existe usa la foto del producto.
   const foto = fotoProducto("corte-de-la-semana") || (producto && fotoProducto(producto.nombre));
   const disponible = producto && producto.stock > 0;

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ShopContext } from "./shopContext.js";
-import { categorias } from "../data/productos";
+import { useCatalogo } from "./useCatalogo";
 import { NEGOCIO, waLink } from "../data/negocio";
 import { parsePrecio, formatCLP, formatCantidad, esPorKilo, PASO_KILO } from "../utils/format";
 import { fechaLarga, proximosDias } from "../utils/horario";
@@ -35,6 +35,18 @@ const DATOS_VACIOS = {
 export function ShopProvider({ children }) {
   // item: { id, nombre, precioNum, unidad, cantidad }  (cantidad en kg o unidades)
   const [items, setItems] = useState(() => leer("mdc-carrito", []));
+  const { todos: todosLosProductos } = useCatalogo();
+
+  // El carrito guardado siempre muestra el precio actual del catálogo
+  // (si el dueño cambia un precio en la planilla, se refleja al tiro).
+  const itemsActuales = useMemo(
+    () =>
+      items.map((i) => {
+        const p = todosLosProductos.find((x) => x.id === i.id);
+        return p ? { ...i, nombre: p.nombre, precioNum: parsePrecio(p.precio) } : i;
+      }),
+    [items, todosLosProductos]
+  );
   const [datos, setDatos] = useState(() => ({ ...DATOS_VACIOS, ...leer("mdc-datos", {}) }));
   const [cartOpen, setCartOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
@@ -86,9 +98,9 @@ export function ShopProvider({ children }) {
 
   const clearCart = () => setItems([]);
 
-  const totalItems = items.length;
-  const totalPrice = items.reduce((s, i) => s + i.precioNum * i.cantidad, 0);
-  const hayPreciosPorConfirmar = items.some((i) => i.precioNum === 0);
+  const totalItems = itemsActuales.length;
+  const totalPrice = itemsActuales.reduce((s, i) => s + i.precioNum * i.cantidad, 0);
+  const hayPreciosPorConfirmar = itemsActuales.some((i) => i.precioNum === 0);
 
   // Despacho gratis: cuánto falta para llegar al monto.
   const gratisDesde = NEGOCIO.despachoGratisDesde || 0;
@@ -96,7 +108,7 @@ export function ShopProvider({ children }) {
   const faltaParaGratis = gratisDesde > 0 ? Math.max(0, gratisDesde - totalPrice) : 0;
 
   const buildWhatsAppUrl = () => {
-    const lineas = items.map((i) => {
+    const lineas = itemsActuales.map((i) => {
       const sub = i.precioNum ? formatCLP(i.precioNum * i.cantidad) : "precio a confirmar";
       return `• ${formatCantidad(i.cantidad, i.unidad)} ${i.nombre} — ${sub}`;
     });
@@ -126,13 +138,10 @@ export function ShopProvider({ children }) {
   };
 
   // Lista plana de todos los productos, para el panel de stock y el buscador.
-  const todosLosProductos = useMemo(
-    () => categorias.flatMap((cat) => cat.productos.map((p) => ({ ...p, categoria: cat.nombre, categoriaId: cat.id }))),
-    []
-  );
+
 
   const value = {
-    items,
+    items: itemsActuales,
     addItem,
     removeItem,
     stepItem,

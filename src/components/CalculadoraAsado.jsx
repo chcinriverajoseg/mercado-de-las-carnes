@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Mascota from "./Mascota";
 import { useShop } from "../context/useShop";
-import { categorias, buscarProducto } from "../data/productos";
+import { useCatalogo } from "../context/useCatalogo";
 import { formatCLP, formatCantidad, parsePrecio, esPorKilo } from "../utils/format";
 
 // Gramos de carne cruda por adulto según apetito. Un niño cuenta como medio adulto.
@@ -30,10 +30,10 @@ const ID_CARBON = "a3"; // bolsa de 4 kg
 const ID_EMPANADA = "e1";
 
 // Opciones de cada grupo: productos para parrilla, por kilo y con stock.
-function opcionesDe(grupo) {
+function opcionesDe(grupo, { categorias, buscar }) {
   const g = GRUPOS[grupo];
   const lista = g.ids
-    ? g.ids.map(buscarProducto).filter(Boolean)
+    ? g.ids.map(buscar).filter(Boolean)
     : categorias.find((c) => c.id === g.categoria).productos.filter((p) => p.usos?.includes("parrilla"));
   return lista.filter((p) => p.stock > 0 && esPorKilo(p.unidad) && parsePrecio(p.precio) > 0);
 }
@@ -67,6 +67,7 @@ function Contador({ etiqueta, valor, setValor, min = 0 }) {
 
 export default function CalculadoraAsado() {
   const { addItem } = useShop();
+  const catalogo = useCatalogo();
   const [adultos, setAdultos] = useState(6);
   const [ninos, setNinos] = useState(0);
   const [apetito, setApetito] = useState("bueno");
@@ -81,7 +82,7 @@ export default function CalculadoraAsado() {
     const personas = adultos + ninos * 0.5;
     const totalKg = (personas * APETITOS[apetito].gramos) / 1000;
     const filas = Object.entries(ESTILOS[estilo].reparto).map(([grupo, parte]) => {
-      const opciones = opcionesDe(grupo);
+      const opciones = opcionesDe(grupo, catalogo);
       const producto = opciones.find((p) => p.id === elegidos[grupo]) || opciones[0];
       const kg = redondearMedio(totalKg * parte);
       return { grupo, opciones, producto, cantidad: kg, subtotal: producto ? parsePrecio(producto.precio) * kg : 0 };
@@ -96,12 +97,12 @@ export default function CalculadoraAsado() {
     filas.forEach((f) => (f.subtotal = f.producto ? parsePrecio(f.producto.precio) * f.cantidad : 0));
 
     const extras = [];
-    const carbon = buscarProducto(ID_CARBON);
+    const carbon = catalogo.buscar(ID_CARBON);
     if (conCarbon && carbon?.stock > 0) {
       const bolsas = Math.max(1, Math.ceil(kgCarne / 4));
       extras.push({ producto: carbon, cantidad: bolsas, subtotal: parsePrecio(carbon.precio) * bolsas });
     }
-    const empanada = buscarProducto(ID_EMPANADA);
+    const empanada = catalogo.buscar(ID_EMPANADA);
     if (conEmpanadas && empanada?.stock > 0) {
       const n = adultos + ninos;
       extras.push({ producto: empanada, cantidad: n, subtotal: parsePrecio(empanada.precio) * n });
@@ -110,7 +111,7 @@ export default function CalculadoraAsado() {
     const total = [...filas, ...extras].reduce((s, f) => s + f.subtotal, 0);
     const comensales = adultos + ninos;
     return { filas: filas.filter((f) => f.producto), extras, kgCarne, total, porPersona: comensales ? total / comensales : 0 };
-  }, [adultos, ninos, apetito, estilo, elegidos, conCarbon, conEmpanadas]);
+  }, [adultos, ninos, apetito, estilo, elegidos, conCarbon, conEmpanadas, catalogo]);
 
   const agregarTodo = () => {
     [...plan.filas, ...plan.extras].forEach((f) => addItem(f.producto, f.cantidad));

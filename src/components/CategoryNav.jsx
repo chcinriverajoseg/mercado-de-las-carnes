@@ -1,4 +1,4 @@
-import { categorias, OFERTAS } from "../data/productos";
+import { useCatalogo } from "../context/useCatalogo";
 import { useShop } from "../context/useShop";
 
 const estiloBase =
@@ -14,6 +14,7 @@ function irA(id) {
 
 export default function CategoryNav() {
   const { busqueda, setBusqueda } = useShop();
+  const { categorias, ofertas } = useCatalogo();
 
   const onBuscar = (e) => {
     const valor = e.target.value;
@@ -52,7 +53,7 @@ export default function CategoryNav() {
         </label>
 
         <div className="flex gap-2.5 overflow-x-auto no-scrollbar">
-          {OFERTAS.length > 0 && (
+          {ofertas.length > 0 && (
             <a
               href="#ofertas"
               onClick={(e) => onCategoria(e, "ofertas")}
