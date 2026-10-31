@@ -41,7 +41,8 @@ export const NEGOCIO = {
 
 // Planilla de Google con precios, stock y ofertas (ver README → "Planilla de precios").
 // Pega aquí el enlace "Publicar en la web" en formato CSV. Vacío = se usan los precios de productos.js.
-export const PLANILLA_URL = "";
+   export const PLANILLA_URL =
+     "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1hueBi4H3FHMgKWwct_gyW_Ik6c7TALLNYv7U_BT0Y1LAYeYxJ-OtZHI61L_mgaB9UBLjahabNyul/pub?output=csv";
 
 // Enlace de EDICIÓN de esa planilla. Lo abre el botón "Panel del local" del pie de página.
 // Google pide iniciar sesión: solo quienes tengan permiso pueden editar. Vacío = no se muestra el botón.
